@@ -1,0 +1,2573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>English Verb Practice</title>
+<style>
+  :root{
+    --paper:#eef2f7;
+    --card:#fffdf7;
+    --ink:#1f3552;
+    --ink-soft:#4b5d75;
+    --margin:#c0392b;
+    --line:#c9d6e4;
+    --accent:#2b6cb0;
+    --accent-dark:#1f4f85;
+    --good:#2f9e44;
+    --good-bg:#e6f7e9;
+    --bad:#e03131;
+    --bad-bg:#fdecec;
+    --tab:#f4d35e;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+    color:var(--ink);
+    background:
+      repeating-linear-gradient(var(--paper) 0px, var(--paper) 27px, var(--line) 28px),
+      var(--paper);
+    min-height:100vh;
+    padding-bottom:40px;
+  }
+  header{
+    background:var(--ink);
+    color:#f4efe1;
+    padding:18px 16px 14px;
+    text-align:center;
+    position:relative;
+    border-bottom:6px solid var(--margin);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    max-width:100%;
+    margin:0 0 12px;
+    justify-content:flex-start;
+  }
+  .brand-photo{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--tab);
+    flex-shrink:0;
+  }
+  .brand-text{
+    font-family:'Courier New', monospace;
+    font-size:0.72rem;
+    font-weight:700;
+    color:#e9e2cc;
+    text-align:left;
+    line-height:1.2;
+  }
+  .brand-sep{color:var(--tab);}
+  .brand-whatsapp{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    margin-top:3px;
+    font-family:'Courier New', monospace;
+    font-size:0.7rem;
+    font-weight:700;
+    color:#25D366;
+  }
+  .brand-whatsapp svg{width:13px; height:13px; flex-shrink:0;}
+  @media (min-width:560px){
+    .brand-text{font-size:0.82rem;}
+    .brand-photo{width:46px; height:46px;}
+    .brand-whatsapp{font-size:0.78rem;}
+    .brand-whatsapp svg{width:15px; height:15px;}
+  }
+  header h1{
+    font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    font-weight:700;
+    font-size:1.5rem;
+    margin:0 0 2px;
+    letter-spacing:0.3px;
+  }
+  header p.sub{
+    margin:0;
+    font-size:0.82rem;
+    color:#cdd8e6;
+    font-family: 'Courier New', monospace;
+    letter-spacing:0.5px;
+  }
+  nav.mainnav{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:14px auto 0;
+    max-width:900px;
+    padding:0 12px;
+  }
+  nav.mainnav button{
+    font-family: 'Courier New', monospace;
+    font-size:0.85rem;
+    font-weight:700;
+    background:var(--card);
+    border:2px solid var(--ink);
+    color:var(--ink);
+    padding:8px 14px;
+    border-radius:6px 6px 0 0;
+    cursor:pointer;
+  }
+  nav.mainnav button.active{
+    background:var(--ink);
+    color:#f4efe1;
+  }
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:16px 12px 0;
+  }
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  /* ---- practice mode selector ---- */
+  .mode-row{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  .mode-row button{
+    flex:1 1 140px;
+    max-width:220px;
+    padding:10px 8px;
+    border-radius:8px;
+    border:2px solid var(--accent);
+    background:var(--card);
+    color:var(--accent-dark);
+    font-weight:700;
+    font-size:0.92rem;
+    cursor:pointer;
+  }
+  .mode-row button.active{
+    background:var(--accent);
+    color:#fff;
+  }
+
+  /* ---- stats bar ---- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin-bottom:16px;
+  }
+  .stat{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:8px 4px;
+    text-align:center;
+  }
+  .stat .num{
+    font-family: Georgia, serif;
+    font-size:1.3rem;
+    font-weight:700;
+    color:var(--accent-dark);
+  }
+  .stat .lab{
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:var(--ink-soft);
+  }
+
+  /* ---- practice card ---- */
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:6px solid var(--margin);
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(31,53,82,0.08);
+    padding:20px 18px 18px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .tab-badge{
+    position:absolute;
+    top:-12px;
+    left:16px;
+    background:var(--tab);
+    color:var(--ink);
+    font-family:'Courier New', monospace;
+    font-weight:700;
+    font-size:0.75rem;
+    padding:3px 10px;
+    border-radius:4px;
+    border:1px solid var(--ink);
+  }
+  .verb-side{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+  }
+  .verb-side .tag{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.8px;
+    color:var(--ink-soft);
+    font-family:'Courier New', monospace;
+  }
+  .verb-side .word{
+    font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    font-size:2.1rem;
+    font-weight:700;
+    color:var(--ink);
+    line-height:1.1;
+  }
+  .word-phonetic{
+    font-family:'Courier New', monospace;
+    font-size:0.85rem;
+    color:var(--accent-dark);
+    margin-top:2px;
+  }
+  .cell-phonetic{
+    display:block;
+    font-family:'Courier New', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+  .fields{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+  }
+  .field label{
+    font-size:0.72rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:var(--ink-soft);
+  }
+  .field input{
+    font-size:1rem;
+    padding:9px 10px;
+    border-radius:7px;
+    border:2px solid var(--line);
+    font-family: inherit;
+    background:#fff;
+    color:var(--ink);
+  }
+  .field input:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
+  .field.correct input{
+    border-color:var(--good);
+    background:var(--good-bg);
+  }
+  .field.wrong input{
+    border-color:var(--bad);
+    background:var(--bad-bg);
+  }
+  .field-phonetic{
+    display:block;
+    min-height:1.1em;
+    font-family:'Courier New', monospace;
+    font-size:0.78rem;
+    color:var(--good);
+    margin-top:3px;
+  }
+  .card-actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    max-width:360px;
+  }
+  .card-actions button{
+    width:100%;
+    padding:11px 10px;
+    font-size:0.95rem;
+    font-weight:700;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+  }
+  #btnCheck{background:var(--accent); color:#fff;}
+  #btnCheck:hover{background:var(--accent-dark);}
+  #btnNext{background:var(--ink); color:#f4efe1;}
+  .result-msg{
+    font-size:0.9rem;
+    font-weight:700;
+    min-height:1.2em;
+  }
+  .result-msg.good{color:var(--good);}
+  .result-msg.bad{color:var(--bad);}
+
+  @media (min-width: 700px){
+    .card{
+      display:grid;
+      grid-template-columns:200px 1fr;
+      column-gap:24px;
+      row-gap:16px;
+      padding:26px 26px 22px;
+    }
+    .verb-side{
+      grid-column:1;
+      grid-row:1 / span 3;
+      padding-top:6px;
+    }
+    .fields{
+      grid-column:2;
+      grid-row:1;
+    }
+    .card-actions{
+      grid-column:2;
+      grid-row:2;
+    }
+    .result-msg{
+      grid-column:2;
+      grid-row:3;
+    }
+  }
+
+  /* ---- verb list panels ---- */
+  .list-wrap{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:24px;
+  }
+  .list-wrap h2{
+    margin:0;
+    background:var(--ink);
+    color:#f4efe1;
+    font-family:Georgia, serif;
+    font-size:1.05rem;
+    padding:10px 16px;
+  }
+  table.vlist{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.85rem;
+  }
+  table.vlist th, table.vlist td{
+    padding:7px 8px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+  }
+  table.vlist th{
+    background:#f0f4f9;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    color:var(--ink-soft);
+    position:sticky;
+    top:0;
+  }
+  table.vlist td.num{
+    color:var(--ink-soft);
+    font-family:'Courier New', monospace;
+    width:2.4em;
+  }
+  table.vlist tr:nth-child(even) td{background:#f8fafc;}
+  .list-scroll{max-height:70vh; overflow:auto;}
+
+  footer{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:0.75rem;
+    padding:20px 12px 6px;
+  }
+
+  /* ---- top-level screen system ---- */
+  .screen{display:none;}
+  .screen.active{display:block;}
+  .screen.welcome-screen.active{display:flex;} /* higher specificity: keeps this screen a flex container so its content stays centered on wide viewports too */
+
+  .welcome-screen{
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    padding:40px 16px 60px;
+    text-align:center;
+  }
+  .welcome-screen h2{
+    font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    font-size:1.3rem;
+    color:var(--ink);
+    margin:0 0 4px;
+  }
+  .welcome-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    width:100%;
+    max-width:340px;
+    margin:0 auto;
+  }
+  .welcome-btn{
+    font-family:'Courier New', monospace;
+    font-size:1.05rem;
+    font-weight:700;
+    letter-spacing:0.4px;
+    padding:22px 18px;
+    border-radius:12px;
+    border:2px solid var(--ink);
+    background:var(--card);
+    color:var(--ink);
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(31,53,82,0.08);
+    transition:transform 0.08s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .welcome-btn:hover{
+    background:var(--ink);
+    color:#f4efe1;
+  }
+  .welcome-btn:active{
+    transform:scale(0.98);
+  }
+  .welcome-btn.section-active{
+    background:var(--ink);
+    color:#f4efe1;
+    border-color:var(--ink);
+  }
+
+  .placeholder-screen{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+    padding:60px 16px;
+    text-align:center;
+  }
+  .placeholder-screen h2{
+    font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    font-size:1.6rem;
+    color:var(--ink);
+    margin:0;
+  }
+  .placeholder-screen p.hint{
+    margin:0;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    font-family:'Courier New', monospace;
+  }
+  .back-btn{
+    font-family:'Courier New', monospace;
+    font-size:0.9rem;
+    font-weight:700;
+    padding:10px 20px;
+    border-radius:8px;
+    border:2px solid var(--accent);
+    background:var(--card);
+    color:var(--accent-dark);
+    cursor:pointer;
+  }
+  .back-btn:hover{
+    background:var(--accent);
+    color:#fff;
+  }
+
+  /* ---- practice setup panel ---- */
+  .practice-setup{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 14px 16px;
+    margin-bottom:16px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .setup-group{display:flex; flex-direction:column; gap:6px;}
+  .setup-label{
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    font-weight:700;
+    color:var(--ink-soft);
+    font-family:'Courier New', monospace;
+  }
+  .btn-group{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+  .opt-btn{
+    flex:1 1 120px;
+    padding:8px 8px;
+    border-radius:7px;
+    border:2px solid var(--accent);
+    background:#fff;
+    color:var(--accent-dark);
+    font-weight:700;
+    font-size:0.82rem;
+    cursor:pointer;
+    line-height:1.3;
+  }
+  .opt-btn .opt-sub{
+    display:block;
+    font-weight:400;
+    font-size:0.68rem;
+    opacity:0.85;
+  }
+  .opt-btn.active{
+    background:var(--accent);
+    color:#fff;
+  }
+  .sub-select-wrap select{
+    width:100%;
+    font-size:0.88rem;
+    padding:8px 8px;
+    border-radius:7px;
+    border:2px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    font-family:inherit;
+  }
+  .pool-info{
+    font-family:'Courier New', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    text-align:center;
+    padding-top:2px;
+  }
+
+  /* ---- beginner drag & drop card ---- */
+  .dnd-slots{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .dnd-slot{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+  }
+  .slot-label{
+    font-size:0.72rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:var(--ink-soft);
+  }
+  .slot-drop{
+    min-height:2.4em;
+    display:flex;
+    align-items:center;
+    padding:8px 10px;
+    border-radius:7px;
+    border:2px dashed var(--line);
+    background:#fff;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+    cursor:pointer;
+  }
+  .slot-drop.filled{
+    border-style:solid;
+    color:var(--ink);
+    font-weight:700;
+    background:#f4f7fb;
+  }
+  .slot-drop.correct{
+    border-color:var(--good);
+    background:var(--good-bg);
+    color:var(--good);
+  }
+  .slot-drop.wrong{
+    border-color:var(--bad);
+    background:var(--bad-bg);
+    color:var(--bad);
+  }
+  .slot-drop.drag-over{
+    border-color:var(--accent);
+    background:#eaf2fb;
+  }
+  .chip-hint{
+    margin:0;
+    font-size:0.75rem;
+    color:var(--ink-soft);
+    font-family:'Courier New', monospace;
+  }
+  .end-test-btn{
+    display:block;
+    margin:14px auto 0;
+    padding:8px 16px;
+    font-family:'Courier New', monospace;
+    font-size:0.8rem;
+    font-weight:700;
+    border-radius:7px;
+    border:2px solid var(--bad);
+    background:#fff;
+    color:var(--bad);
+    cursor:pointer;
+  }
+  .end-test-btn:hover{
+    background:var(--bad);
+    color:#fff;
+  }
+  .report-early-note{
+    background:var(--bad-bg);
+    border:1px solid var(--bad);
+    color:var(--bad);
+    border-radius:8px;
+    padding:10px 14px;
+    font-size:0.85rem;
+    font-weight:700;
+  }
+  .chip-bank{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    min-height:2.6em;
+    padding:8px;
+    border-radius:8px;
+    background:#f0f4f9;
+    border:1px solid var(--line);
+  }
+  .chip{
+    padding:8px 12px;
+    border-radius:20px;
+    background:var(--tab);
+    color:var(--ink);
+    font-weight:700;
+    font-size:0.88rem;
+    cursor:grab;
+    border:2px solid #dbb932;
+    user-select:none;
+  }
+  .chip.selected{
+    background:var(--accent);
+    color:#fff;
+    border-color:var(--accent-dark);
+  }
+
+  /* ---- difficult verbs box ---- */
+  .difficult-box{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:6px solid var(--tab);
+    border-radius:10px;
+    padding:12px 16px;
+    margin-top:18px;
+  }
+  .difficult-box h3{
+    margin:0 0 8px;
+    font-family: Georgia, serif;
+    font-size:1rem;
+    color:var(--ink);
+  }
+  .difficult-box ul{
+    margin:0;
+    padding-left:18px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .difficult-box li{
+    font-size:0.88rem;
+    color:var(--ink);
+  }
+  .miss-count{
+    color:var(--bad);
+    font-size:0.78rem;
+    font-family:'Courier New', monospace;
+  }
+
+  /* ---- test mode ---- */
+  .test-panel{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .test-heading{
+    font-family: Georgia, serif;
+    font-size:1.3rem;
+    color:var(--ink);
+    margin:4px 0 0;
+    text-align:center;
+  }
+  .text-input{
+    width:100%;
+    font-size:0.95rem;
+    padding:10px 10px;
+    border-radius:7px;
+    border:2px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    font-family:inherit;
+  }
+  .field-error{
+    color:var(--bad);
+    font-size:0.8rem;
+    font-family:'Courier New', monospace;
+  }
+  .test-hud{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--ink);
+    color:#f4efe1;
+    border-radius:10px;
+    padding:10px 16px;
+  }
+  .test-timer{
+    font-family:'Courier New', monospace;
+    font-size:1.4rem;
+    font-weight:700;
+    letter-spacing:1px;
+  }
+  .test-progress{
+    font-family:'Courier New', monospace;
+    font-size:0.85rem;
+    opacity:0.9;
+  }
+  .report-meta{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    font-size:0.9rem;
+    color:var(--ink);
+  }
+  .report-score{
+    text-align:center;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px;
+  }
+  .score-big{
+    font-family: Georgia, serif;
+    font-size:1.8rem;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .score-sub{
+    font-family:'Courier New', monospace;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  .report-section h3{
+    margin:0 0 8px;
+    font-family: Georgia, serif;
+    font-size:1rem;
+    color:var(--ink);
+  }
+  .report-list{
+    margin:0;
+    padding-left:18px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    max-height:260px;
+    overflow:auto;
+  }
+  .report-list li{
+    font-size:0.87rem;
+    color:var(--ink);
+  }
+
+  /* ---- verb lists ---- */
+  .lists-buttons{
+    max-width:440px;
+    margin:0 auto;
+  }
+  .list-count{
+    font-size:0.8rem;
+    font-weight:400;
+    color:var(--ink-soft);
+  }
+  .local-back-btn{
+    font-family:'Courier New', monospace;
+    font-size:0.9rem;
+    font-weight:700;
+    padding:10px 20px;
+    border-radius:8px;
+    border:2px solid var(--accent);
+    background:var(--card);
+    color:var(--accent-dark);
+    cursor:pointer;
+    margin-top:16px;
+  }
+  .local-back-btn:hover{
+    background:var(--accent);
+    color:#fff;
+  }
+  .vlist{
+    list-style:decimal;
+    padding-left:26px;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    max-height:65vh;
+    overflow:auto;
+  }
+  .vlist-item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 12px 12px;
+  }
+  .vlist-item::marker{
+    font-weight:700;
+    color:var(--accent-dark);
+  }
+  .vlist-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+    gap:8px 10px;
+  }
+  .vlist-field{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+  }
+  .vlist-label{
+    font-size:0.62rem;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    color:var(--ink-soft);
+    font-weight:700;
+  }
+  .vlist-word{
+    font-size:0.95rem;
+    font-weight:700;
+    color:var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img class="brand-photo" src="data:image/jpeg;base64,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" alt="Master David Basantes">
+    <span class="brand-text">
+      Master David Basantes <span class="brand-sep">|</span> English Mentor
+      <span class="brand-whatsapp">
+        <svg viewBox="0 0 32 32" fill="#25D366" xmlns="http://www.w3.org/2000/svg"><path d="M16.001 3C9.096 3 3.5 8.596 3.5 15.5c0 2.29.62 4.435 1.7 6.279L3 29l7.4-2.153a12.43 12.43 0 0 0 5.601 1.348h.005c6.905 0 12.5-5.596 12.5-12.5S22.906 3 16.001 3zm0 22.7h-.004a10.18 10.18 0 0 1-5.19-1.421l-.372-.22-3.87 1.127 1.15-3.774-.242-.387a10.16 10.16 0 0 1-1.573-5.525c0-5.632 4.585-10.2 10.207-10.2 2.726 0 5.288 1.06 7.218 2.988a10.14 10.14 0 0 1 2.987 7.222c0 5.632-4.585 10.19-10.311 10.19zm5.593-7.646c-.306-.153-1.81-.892-2.09-.994-.28-.102-.484-.153-.688.153-.204.306-.79.994-.968 1.198-.178.204-.357.23-.663.077-.306-.153-1.293-.477-2.463-1.52-.91-.812-1.525-1.815-1.703-2.121-.178-.306-.019-.472.134-.624.138-.137.306-.357.459-.535.153-.178.204-.306.306-.51.102-.204.051-.383-.026-.536-.077-.153-.688-1.658-.943-2.271-.248-.596-.5-.516-.688-.526l-.586-.01a1.13 1.13 0 0 0-.816.383c-.28.306-1.069 1.045-1.069 2.55s1.094 2.958 1.246 3.163c.153.204 2.153 3.287 5.217 4.609.729.315 1.298.503 1.741.643.732.233 1.397.2 1.924.121.587-.088 1.81-.74 2.065-1.454.255-.715.255-1.327.179-1.454-.077-.128-.28-.204-.586-.357z"/></svg>
+        +593 98 760 3969
+      </span>
+    </span>
+  </div>
+  <h1>English Verb Practice</h1>
+  <p class="sub">Present &middot; Past &middot; Participle &middot; Gerund &middot; Spanish</p>
+</header>
+
+<main>
+
+  <!-- ============ WELCOME SCREEN ============ -->
+  <section id="screen-welcome" class="screen active welcome-screen">
+    <h2>Choose how you want to practice</h2>
+    <div class="welcome-buttons">
+      <button id="btnGoLists" class="welcome-btn">Verb Lists</button>
+      <button id="btnGoPractice" class="welcome-btn">Practice Mode</button>
+      <button id="btnGoTest" class="welcome-btn">Test Mode</button>
+    </div>
+  </section>
+
+  <!-- ============ PRACTICE MODE ============ -->
+  <section id="screen-practice" class="screen">
+
+    <div class="practice-setup">
+      <div class="setup-group">
+        <div class="setup-label">Level</div>
+        <div class="btn-group" id="levelGroup">
+          <button class="opt-btn active" data-level="beginner">Beginner <span class="opt-sub">(drag &amp; drop)</span></button>
+          <button class="opt-btn" data-level="expert">Expert <span class="opt-sub">(type answer)</span></button>
+        </div>
+      </div>
+
+      <div class="setup-group">
+        <div class="setup-label">Verb list</div>
+        <div class="btn-group" id="listGroup">
+          <button class="opt-btn active" data-list="reg">Regular</button>
+          <button class="opt-btn" data-list="irr">Irregular</button>
+          <button class="opt-btn" data-list="mix">Mix</button>
+        </div>
+      </div>
+
+      <div class="setup-group" id="irrFilterGroup" style="display:none">
+        <div class="setup-label">Irregular filter</div>
+        <div class="btn-group" id="filterTypeGroup">
+          <button class="opt-btn active" data-filter="full">Full list</button>
+          <button class="opt-btn" data-filter="blocks">Blocks of 10</button>
+          <button class="opt-btn" data-filter="pattern">Pattern</button>
+          <button class="opt-btn" data-filter="rhyme">Sound / rhyme</button>
+        </div>
+        <div class="sub-select-wrap" id="blockSelectWrap" style="display:none">
+          <select id="blockSelect"></select>
+        </div>
+        <div class="sub-select-wrap" id="patternSelectWrap" style="display:none">
+          <select id="patternSelect"></select>
+        </div>
+        <div class="sub-select-wrap" id="rhymeSelectWrap" style="display:none">
+          <select id="rhymeSelect"></select>
+        </div>
+      </div>
+
+      <div class="setup-group">
+        <div class="setup-label">Order</div>
+        <div class="btn-group" id="orderGroup">
+          <button class="opt-btn active" data-order="seq">Sequential</button>
+          <button class="opt-btn" data-order="rand">Random</button>
+        </div>
+      </div>
+
+      <div class="pool-info" id="poolInfo"></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="num" id="statIntentos">0</div><div class="lab">Attempts</div></div>
+      <div class="stat"><div class="num" id="statAciertos">0</div><div class="lab">Correct</div></div>
+      <div class="stat"><div class="num" id="statRacha">0</div><div class="lab">Streak</div></div>
+      <div class="stat"><div class="num" id="statPuntaje">0%</div><div class="lab">Score</div></div>
+    </div>
+
+    <!-- EXPERT CARD (type the answer) -->
+    <div class="card" id="expertCard" style="display:none">
+      <div class="tab-badge" id="verbTab">#1</div>
+      <div class="verb-side">
+        <div class="tag">Present</div>
+        <div class="word" id="verbWord">—</div>
+        <div class="word-phonetic" id="verbWordPh"></div>
+      </div>
+      <div class="fields">
+        <div class="field" id="f-past">
+          <label for="in-past">Past</label>
+          <input id="in-past" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <span class="field-phonetic" id="ph-past"></span>
+        </div>
+        <div class="field" id="f-part">
+          <label for="in-part">Participle</label>
+          <input id="in-part" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <span class="field-phonetic" id="ph-part"></span>
+        </div>
+        <div class="field" id="f-ger">
+          <label for="in-ger">Gerund</label>
+          <input id="in-ger" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <span class="field-phonetic" id="ph-ger"></span>
+        </div>
+        <div class="field" id="f-esp">
+          <label for="in-esp">Spanish</label>
+          <input id="in-esp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+        </div>
+      </div>
+      <div class="card-actions">
+        <button id="btnCheck">Check</button>
+        <button id="btnNext">Next verb</button>
+      </div>
+      <div class="result-msg" id="resultMsg"></div>
+    </div>
+
+    <!-- BEGINNER CARD (drag & drop to the slots) -->
+    <div class="card beginner-card" id="beginnerCard">
+      <div class="tab-badge" id="verbTabB">#1</div>
+      <div class="verb-side">
+        <div class="tag">Present</div>
+        <div class="word" id="verbWordB">—</div>
+        <div class="word-phonetic" id="verbWordPhB"></div>
+      </div>
+      <div class="dnd-slots">
+        <div class="dnd-slot">
+          <span class="slot-label">Past</span>
+          <div class="slot-drop" data-slot="past">Drop here</div>
+        </div>
+        <div class="dnd-slot">
+          <span class="slot-label">Participle</span>
+          <div class="slot-drop" data-slot="part">Drop here</div>
+        </div>
+        <div class="dnd-slot">
+          <span class="slot-label">Gerund</span>
+          <div class="slot-drop" data-slot="ger">Drop here</div>
+        </div>
+        <div class="dnd-slot">
+          <span class="slot-label">Spanish</span>
+          <div class="slot-drop" data-slot="esp">Drop here</div>
+        </div>
+      </div>
+      <p class="chip-hint">Drag a tile into a slot (or tap a tile, then tap the slot).</p>
+      <div class="chip-bank" id="chipBank"></div>
+      <div class="card-actions">
+        <button id="btnCheckB">Check</button>
+        <button id="btnNextB">Next verb</button>
+      </div>
+      <div class="result-msg" id="resultMsgB"></div>
+    </div>
+
+    <div class="difficult-box" id="difficultBox" style="display:none">
+      <h3>Tricky verbs this session</h3>
+      <ul id="difficultList"></ul>
+    </div>
+
+    <button class="back-btn" data-target="welcome" style="margin-top:22px">Back to Welcome</button>
+  </section>
+
+  <!-- ============ TEST MODE PLACEHOLDER ============ -->
+  <!-- ============ TEST MODE ============ -->
+  <section id="screen-test" class="screen">
+
+    <!-- ---- SETUP PANEL ---- -->
+    <div id="testSetupPanel" class="test-panel">
+      <h2 class="test-heading">Test Mode — Setup</h2>
+
+      <div class="setup-group">
+        <div class="setup-label">Student name</div>
+        <input type="text" id="testStudentName" class="text-input" placeholder="Enter your name" autocomplete="off">
+        <div class="field-error" id="testNameError" style="display:none">Please enter your name to start the test.</div>
+      </div>
+
+      <div class="setup-group">
+        <div class="setup-label">Scope</div>
+        <div class="btn-group" id="testScopeGroup">
+          <button class="opt-btn active" data-scope="reg">Regular</button>
+          <button class="opt-btn" data-scope="irr">Irregular</button>
+          <button class="opt-btn" data-scope="mix">Mix</button>
+        </div>
+      </div>
+
+      <div class="setup-group">
+        <div class="setup-label">Test type</div>
+        <div class="btn-group" id="testTypeGroup">
+          <button class="opt-btn" data-type="blocks">Block of 10</button>
+          <button class="opt-btn" data-type="pattern">Pattern (AAA/ABA/ABB/ABC)</button>
+          <button class="opt-btn active" data-type="full">Full list</button>
+        </div>
+        <div class="sub-select-wrap" id="testBlockSelectWrap" style="display:none">
+          <select id="testBlockSelect"></select>
+        </div>
+        <div class="sub-select-wrap" id="testPatternSelectWrap" style="display:none">
+          <select id="testPatternSelect"></select>
+        </div>
+      </div>
+
+      <div class="setup-group">
+        <div class="setup-label">Order</div>
+        <div class="btn-group" id="testOrderGroup">
+          <button class="opt-btn active" data-order="seq">Sequential</button>
+          <button class="opt-btn" data-order="rand">Random</button>
+        </div>
+      </div>
+
+      <div class="pool-info" id="testPoolInfo"></div>
+
+      <button id="btnStartTest" class="welcome-btn" style="margin-top:6px">Start Test</button>
+      <button class="back-btn" data-target="welcome" style="margin-top:14px">Back to Welcome</button>
+    </div>
+
+    <!-- ---- RUNNING PANEL ---- -->
+    <div id="testRunningPanel" class="test-panel" style="display:none">
+      <div class="test-hud">
+        <div class="test-timer" id="testTimerDisplay">00:00</div>
+        <div class="test-progress" id="testProgress">Verb 1 of 1</div>
+      </div>
+
+      <div class="card" id="testCard">
+        <div class="tab-badge" id="testVerbTab">#1</div>
+        <div class="verb-side">
+          <div class="tag">Present</div>
+          <div class="word" id="testVerbWord">—</div>
+          <div class="word-phonetic" id="testVerbWordPh"></div>
+        </div>
+        <div class="fields">
+          <div class="field" id="tf-past">
+            <label for="test-in-past">Past</label>
+            <input id="test-in-past" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+          </div>
+          <div class="field" id="tf-part">
+            <label for="test-in-part">Participle</label>
+            <input id="test-in-part" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+          </div>
+          <div class="field" id="tf-ger">
+            <label for="test-in-ger">Gerund</label>
+            <input id="test-in-ger" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+          </div>
+          <div class="field" id="tf-esp">
+            <label for="test-in-esp">Spanish</label>
+            <input id="test-in-esp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+          </div>
+        </div>
+        <div class="card-actions">
+          <button id="btnSubmitTest">Submit Answer</button>
+        </div>
+        <p class="chip-hint">No retries and no skipping — each verb is graded once and the test moves on automatically. Results appear in your final report.</p>
+        <button id="btnEndTest" class="end-test-btn">End Test</button>
+      </div>
+    </div>
+
+    <!-- ---- REPORT PANEL ---- -->
+    <div id="testReportPanel" class="test-panel" style="display:none">
+      <h2 class="test-heading">Test Report</h2>
+      <div class="report-early-note" id="reportEarlyNote" style="display:none"></div>
+
+      <div class="report-meta" id="reportMeta"></div>
+      <div class="report-score" id="reportScore"></div>
+
+      <div class="report-section">
+        <h3>Failed verbs</h3>
+        <ul id="reportFailedList" class="report-list"></ul>
+      </div>
+
+      <div class="report-section">
+        <h3>Time per verb</h3>
+        <ul id="reportTimeList" class="report-list"></ul>
+      </div>
+
+      <button id="btnPrintReport" class="welcome-btn" style="margin-top:14px">Download Report</button>
+      <button id="btnNewTest" class="welcome-btn" style="margin-top:14px">Start a new test</button>
+      <button class="back-btn" data-target="welcome" style="margin-top:14px">Back to Welcome</button>
+    </div>
+
+  </section>
+
+  <!-- ============ VERB LISTS ============ -->
+  <section id="screen-lists" class="screen">
+
+    <!-- MENU: Regular vs Irregular -->
+    <div id="listsMenuPanel" class="test-panel">
+      <h2 class="test-heading">Verb Lists</h2>
+      <div class="welcome-buttons lists-buttons">
+        <button id="btnListsRegular" class="welcome-btn">Regular Verbs <span class="opt-sub">(214)</span></button>
+        <button id="btnListsIrregularMenu" class="welcome-btn">Irregular Verbs <span class="opt-sub">(118)</span></button>
+      </div>
+      <button class="back-btn" data-target="welcome" style="margin-top:14px">Back to Welcome</button>
+    </div>
+
+    <!-- REGULAR VERBS — full enumerated list -->
+    <div id="listsRegularPanel" class="test-panel" style="display:none">
+      <h2 class="test-heading">Regular Verbs <span class="list-count">(214)</span></h2>
+      <ol class="vlist" id="listsRegularOl"></ol>
+      <button class="local-back-btn" data-list-target="menu">Back to Verb Lists</button>
+    </div>
+
+    <!-- IRREGULAR SUB-MENU: Standard vs By Pattern -->
+    <div id="listsIrregularMenuPanel" class="test-panel" style="display:none">
+      <h2 class="test-heading">Irregular Verbs</h2>
+      <div class="welcome-buttons lists-buttons">
+        <button id="btnListsIrregularStandard" class="welcome-btn">Standard List <span class="opt-sub">(118, in order)</span></button>
+        <button id="btnListsIrregularPatternMenu" class="welcome-btn">By Pattern <span class="opt-sub">(AAA / ABA / ABB / ABC)</span></button>
+      </div>
+      <button class="local-back-btn" data-list-target="menu">Back to Verb Lists</button>
+    </div>
+
+    <!-- IRREGULAR — standard enumerated list -->
+    <div id="listsIrregularStandardPanel" class="test-panel" style="display:none">
+      <h2 class="test-heading">Irregular Verbs \u2014 Standard List <span class="list-count">(118)</span></h2>
+      <ol class="vlist" id="listsIrregularStandardOl"></ol>
+      <button class="local-back-btn" data-list-target="irrMenu">Back to Irregular Verbs</button>
+    </div>
+
+    <!-- IRREGULAR — pattern menu -->
+    <div id="listsIrregularPatternMenuPanel" class="test-panel" style="display:none">
+      <h2 class="test-heading">Irregular Verbs \u2014 By Pattern</h2>
+      <div class="welcome-buttons lists-buttons" id="listsPatternButtons"></div>
+      <button class="local-back-btn" data-list-target="irrMenu">Back to Irregular Verbs</button>
+    </div>
+
+    <!-- IRREGULAR — one pattern's enumerated list -->
+    <div id="listsIrregularPatternDetailPanel" class="test-panel" style="display:none">
+      <h2 class="test-heading" id="listsPatternDetailHeading">Pattern</h2>
+      <ol class="vlist" id="listsPatternDetailOl"></ol>
+      <button class="local-back-btn" data-list-target="irrPatternMenu">Back to Patterns</button>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       LEGACY APP (existing Practice engine + verb list tables)
+       Kept intact for reuse in upcoming phases. Hidden for now
+       since it is not yet wired into the new navigation.
+       ============================================================ -->
+  <div id="legacy-app" style="display:none">
+
+  <!-- REGULAR LIST PANEL -->
+  <section id="panel-listReg" class="panel">
+    <div class="list-wrap">
+      <h2>Regular Verbs List</h2>
+      <div class="list-scroll">
+        <table class="vlist">
+          <thead><tr><th>#</th><th>Present</th><th>Past</th><th>Participle</th><th>Gerund</th><th>Spanish</th></tr></thead>
+          <tbody id="tblReg"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- IRREGULAR LIST PANEL -->
+  <section id="panel-listIrr" class="panel">
+    <div class="list-wrap">
+      <h2>Irregular Verbs List</h2>
+      <div class="list-scroll">
+        <table class="vlist">
+          <thead><tr><th>#</th><th>Present</th><th>Past</th><th>Participle</th><th>Gerund</th><th>Spanish</th></tr></thead>
+          <tbody id="tblIrr"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  </div><!-- /legacy-app -->
+
+</main>
+
+<footer>Self-contained file &middot; works offline</footer>
+
+<script>
+/* =====================================================
+   DATA
+   Regulars: [present, past, spanish]  (participle = past)
+   Irregulars: [present, past, participle, gerund, spanish]
+   ===================================================== */
+const REGULARS_RAW = [
+["Accept","Accepted","Aceptar"],["Act","Acted","Actuar"],["Achieve","Achieved","Lograr, alcanzar"],
+["Admire","Admired","Admirar"],["Advise","Advised","Aconsejar"],["Affect","Affected","Afectar"],
+["Agree","Agreed","Acordar"],["Amaze","Amazed","Asombrar"],["Amuse","Amused","Divertir"],
+["Answer","Answered","Responder"],["Appear","Appeared","Aparecer"],["Arrange","Arranged","Arreglar, disponer"],
+["Arrive","Arrived","Llegar"],["Ask","Asked","Preguntar"],["Attack","Attacked","Atacar"],
+["Bake","Baked","Hornear"],["Behave","Behaved","Comportarse"],["Believe","Believed","Creer"],
+["Belong","Belonged","Pertenecer"],["Blame","Blamed","Culpar"],["Borrow","Borrowed","Pedir prestado"],
+["Bother","Bothered","Molestar"],["Call","Called","Llamar"],["Cancel","Canceled","Cancelar, suprimir"],
+["Carry","Carried","Llevar"],["Cause","Caused","Causar"],["Celebrate","Celebrated","Celebrar"],
+["Clean","Cleaned","Limpiar"],["Clear","Cleared","Aclarar"],["Climb","Climbed","Trepar"],
+["Close","Closed","Cerrar"],["Compare","Compared","Comparar"],["Compete","Competed","Competir"],
+["Complete","Completed","Completar"],["Contain","Contained","Contener"],["Continue","Continued","Continuar"],
+["Cook","Cooked","Cocinar"],["Correct","Corrected","Corregir"],["Cough","Coughed","Toser"],
+["Count","Counted","Contar"],["Crash","Crashed","Chocar"],["Create","Created","Crear"],
+["Cross","Crossed","Cruzar"],["Curse","Cursed","Maldecir"],["Change","Changed","Cambiar"],
+["Chase","Chased","Perseguir"],["Chat","Chatted","Charlar"],["Check","Checked","Verificar"],
+["Damage","Damaged","Danar"],["Dance","Danced","Bailar"],["Date","Dated","Salir con, pololear"],
+["Decide","Decided","Decidir"],["Deliver","Delivered","Entregar"],["Depend","Depended","Depender"],
+["Describe","Described","Describir"],["Design","Designed","Disenar"],["Destroy","Destroyed","Destruir"],
+["Decrease","Decreased","Disminuir"],["Die","Died","Morir"],["Disagree","Disagreed","Estar en desacuerdo"],
+["Discover","Discovered","Descubrir"],["Discuss","Discussed","Discutir"],["Disturb","Disturbed","Molestar"],
+["Dress","Dressed","Vestir"],["Dry","Dried","Secar"],["Eliminate","Eliminated","Eliminar"],
+["End","Ended","Terminar"],["Enjoy","Enjoyed","Disfrutar"],["Entertain","Entertained","Entretener"],
+["Excuse","Excused","Excusar"],["Exercise","Exercised","Ejercitar"],["Exhibit","Exhibited","Exhibir"],
+["Expect","Expected","Esperar"],["Express","Expressed","Expresar"],["Film","Filmed","Filmar"],
+["Fill","Filled","Llenar"],["Fish","Fished","Pescar"],["Fix","Fixed","Arreglar, fijar"],
+["Follow","Followed","Seguir"],["Free","Freed","Libre, Liberado"],["Fry","Fried","Freir"],
+["Greet","Greeted","Saludar"],["Guess","Guessed","Adivinar, suponer"],["Hail","Hailed","Granizar"],
+["Handle","Handled","Manejar"],["Happen","Happened","Suceder"],["Hate","Hated","Odiar, cargarle a uno"],
+["Help","Helped","Ayudar"],["Hope","Hoped","Esperar"],["Hunt","Hunted","Cazar"],
+["Identify","Identified","Identificar"],["Ignore","Ignored","Ignorar"],["Imagine","Imagined","Imaginar"],
+["Impress","Impressed","Impresionar"],["Improve","Improved","Mejorar"],["Include","Included","Incluir"],
+["Increase","Increased","Aumentar"],["Interview","Interviewed","Entrevistar"],["Introduce","Introduced","Introducir, presentar"],
+["Invite","Invited","Invitar"],["Jog","Jogged","Trotar"],["Join","Joined","Juntar, unir, acompanar"],
+["Jump","Jumped","Saltar"],["Knock","Knocked","Golpear"],["Label","Labeled","Rotular, etiquetar"],
+["Land","Landed","Aterrizar"],["Last","Lasted","Durar"],["Learn","Learned","Aprender"],
+["Like","Liked","Gustarle a uno"],["Link","Linked","Unir, vincular"],["List","Listed","Listar"],
+["Listen","Listened","Escuchar"],["Live","Lived","Vivir"],["Locate","Located","Ubicar"],
+["Look","Looked","Mirar, parecer"],["Love","Loved","Amar, encantarle a uno"],["Manage","Managed","Manejar, dirigir"],
+["Mark","Marked","Marcar"],["Match","Matched","Unir, aparejar"],["Measure","Measured","Medir"],
+["Mention","Mentioned","Mencionar"],["Miss","Missed","Perderse, echar de menos, perder"],
+["Move","Moved","Mover, trasladar, cambiarse"],["Name","Named","Nombrar"],["Need","Needed","Necesitar"],
+["Note","Noted","Notar"],["Notice","Noticed","Notar, fijarse"],["Number","Numbered","Numerar"],
+["Offer","Offered","Ofrecer"],["Open","Opened","Abrir"],["Order","Ordered","Ordenar"],
+["Organize","Organized","Organizar"],["Pack","Packed","Empacar"],["Paint","Painted","Pintar"],
+["Pamper","Pampered","Regalonear"],["Pardon","Pardoned","Perdonar"],["Park","Parked","Estacionar"],
+["Participate","Participated","Participar"],["Pass","Passed","Pasar, aprobar"],["Perform","Performed","Realizar, ejecutar"],
+["Persuade","Persuaded","Persuadir"],["Pick","Picked","Recoger"],["Plan","Planned","Planear"],
+["Play","Played","Jugar, tocar"],["Please","Pleased","Complacer"],["Practice","Practiced","Practicar"],
+["Predict","Predicted","Predecir"],["Prefer","Preferred","Preferir"],["Present","Presented","Presentar"],
+["Program","Programmed","Programar"],["Protect","Protected","Proteger"],["Provide","Provided","Proporcionar"],
+["Purchase","Purchased","Comprar"],["Push","Pushed","Empujar"],["Rain","Rained","Llover"],
+["Receive","Received","Recibir"],["Recommend","Recommended","Recomendar"],["Relate","Related","Relacionar"],
+["Relax","Relaxed","Descansar"],["Release","Released","Soltar, producir"],["Remember","Remembered","Recordar"],
+["Repair","Repaired","Reparar"],["Repeat","Repeated","Repetir"],["Resist","Resisted","Resistir"],
+["Rest","Rested","Descansar"],["Return","Returned","Volver"],["Review","Reviewed","Revisar"],
+["Sail","Sailed","Navegar"],["Save","Saved","Ahorrar, salvar"],["Scan","Scanned","Examinar"],
+["Scare","Scared","Asustar"],["Share","Shared","Compartir"],["Shop","Shopped","Comprar"],
+["Shout","Shouted","Gritar"],["Skate","Skated","Patinar"],["Ski","Skied","Esquiar"],
+["Slow","Slowed","Disminuir"],["Sneeze","Sneezed","Estornudar"],["Snow","Snowed","Nevar"],
+["Solve","Solved","Resolver"],["Spell","Spelled","Deletrear"],["Start","Started","Empezar"],
+["Step","Stepped","Pisar"],["Stop","Stopped","Detener"],["Stress","Stressed","Acentuar"],
+["Study","Studied","Estudiar"],["Substitute","Substituted","Sustituir"],["Suggest","Suggested","Sugerir"],
+["Surprise","Surprised","Sorprender"],["Talk","Talked","Hablar"],["Taste","Tasted","Probar"],
+["Terrorize","Terrorized","Aterrorizar"],["Thank","Thanked","Agradecer"],["Touch","Touched","Tocar"],
+["Travel","Traveled","Viajar"],["Try","Tried","Tratar"],["Tune","Tuned","Sintonizar"],
+["Turn","Turned","Girar"],["Underline","Underlined","Subrayar"],["Use","Used","Usar"],
+["Vary","Varied","Variar"],["Wait","Waited","Esperar"],["Walk","Walked","Caminar"],
+["Want","Wanted","Desear"],["Warn","Warned","Advertir"],["Wash","Washed","Lavar"],
+["Watch","Watched","Ver, vigilar"],["Water","Watered","Regar"],["Welcome","Welcomed","Recibir"],
+["Wish","Wished","Desear"],["Witness","Witnessed","Ser testigo"],["Work","Worked","Trabajar, funcionar"],
+["Worry","Worried","Preocuparse"],["Wrestle","Wrestled","Luchar"]
+];
+
+const IRREGULARS = [
+["Arise","Arose","Arisen","Arising","Elevar"],["Be","Was, were","Been","Being","Ser"],
+["Beat","Beat","Beaten","Beating","Golpear"],["Become","Became","Become","Becoming","Convertirse"],
+["Begin","Began","Begun","Beginning","Comenzar"],["Bet","Bet","Bet","Betting","Apostar"],
+["Bite","Bit","Bitten","Biting","Morder"],["Bleed","Bled","Bled","Bleeding","Sangrar"],
+["Blow","Blew","Blown","Blowing","Soplar"],["Break","Broke","Broken","Breaking","Romper"],
+["Bring","Brought","Brought","Bringing","Traer"],["Build","Built","Built","Building","Construir"],
+["Buy","Bought","Bought","Buying","Comprar"],["Catch","Caught","Caught","Catching","Atrapar"],
+["Choose","Chose","Chosen","Choosing","Elegir"],["Come","Came","Come","Coming","Venir"],
+["Cost","Cost","Cost","Costing","Costar"],["Creep","Crept","Crept","Creeping","Arrastrarse"],
+["Cut","Cut","Cut","Cutting","Cortar"],["Deal","Dealt","Dealt","Dealing","Negociar"],
+["Do","Did","Done","Doing","Hacer"],["Draw","Drew","Drawn","Drawing","Dibujar"],
+["Dream","Dreamt","Dreamt","Dreaming","Sonar"],["Drink","Drank","Drunk","Drinking","Beber"],
+["Drive","Drove","Driven","Driving","Conducir"],["Eat","Ate","Eaten","Eating","Comer"],
+["Fall","Fell","Fallen","Falling","Caer"],["Feed","Fed","Fed","Feeding","Alimentar"],
+["Feel","Felt","Felt","Feeling","Sentir"],["Fight","Fought","Fought","Fighting","Pelear"],
+["Find","Found","Found","Finding","Encontrar"],["Flee","Fled","Fled","Fleeing","Huir"],
+["Fly","Flew","Flown","Flying","Volar"],["Forget","Forgot","Forgotten","Forgetting","Olvidar"],
+["Forgive","Forgave","Forgiven","Forgiving","Perdonar"],["Forsake","Forsook","Forsaken","Forsaking","Abandonar"],
+["Freeze","Froze","Frozen","Freezing","Congelar"],["Get","Got","Got","Getting","Tener, obtener"],
+["Give","Gave","Given","Giving","Dar"],["Go","Went","Gone","Going","Ir"],
+["Grind","Ground","Ground","Grinding","Moler"],["Grow","Grew","Grown","Growing","Crecer"],
+["Hang","Hung","Hung","Hanging","Colgar"],["Have","Had","Had","Having","Tener"],
+["Hear","Heard","Heard","Hearing","Oir"],["Hide","Hid","Hidden","Hiding","Esconderse"],
+["Hit","Hit","Hit","Hitting","Golpear"],["Hold","Held","Held","Holding","Tener, mantener"],
+["Hurt","Hurt","Hurt","Hurting","Herir"],["Keep","Kept","Kept","Keeping","Guardar"],
+["Kneel","Knelt","Knelt","Kneeling","Arrodillarse"],["Know","Knew","Known","Knowing","Saber"],
+["Lead","Led","Led","Leading","Liderar"],["Learn","Learnt","Learnt","Learning","Aprender"],
+["Leave","Left","Left","Leaving","Dejar"],["Lend","Lent","Lent","Lending","Prestar"],
+["Let","Let","Let","Letting","Permitir"],["Lie","Lay","Lain","Lying","Yacer"],
+["Lose","Lost","Lost","Losing","Perder"],["Make","Made","Made","Making","Hacer"],
+["Mean","Meant","Meant","Meaning","Querer decir"],["Meet","Met","Met","Meeting","Conocer"],
+["Pay","Paid","Paid","Paying","Pagar"],["Put","Put","Put","Putting","Poner"],
+["Quit","Quit","Quit","Quitting","Abandonar"],["Read","Read","Read","Reading","Leer"],
+["Ride","Rode","Ridden","Riding","Montar, ir"],["Ring","Rang","Rung","Ringing","Llamar por telefono"],
+["Rise","Rose","Risen","Rising","Elevar"],["Run","Ran","Run","Running","Correr"],
+["Say","Said","Said","Saying","Decir"],["See","Saw","Seen","Seeing","Ver"],
+["Sell","Sold","Sold","Selling","Vender"],["Send","Sent","Sent","Sending","Enviar"],
+["Set","Set","Set","Setting","Fijar"],["Sew","Sewed","Sewn","Sewing","Coser"],
+["Shake","Shook","Shaken","Shaking","Sacudir"],["Shine","Shone","Shone","Shining","Brillar"],
+["Shoot","Shot","Shot","Shooting","Disparar"],["Show","Showed","Shown","Showing","Mostrar"],
+["Shrink","Shrank","Shrunk","Shrinking","Encoger"],["Shut","Shut","Shut","Shutting","Cerrar"],
+["Sing","Sang","Sung","Singing","Cantar"],["Sink","Sank","Sunk","Sinking","Hundir"],
+["Sit","Sat","Sat","Sitting","Sentarse"],["Sleep","Slept","Slept","Sleeping","Dormir"],
+["Slide","Slid","Slid","Sliding","Deslizar"],["Sow","Sowed","Sown","Sowing","Sembrar"],
+["Speak","Spoke","Spoken","Speaking","Hablar"],["Spell","Spelt/spelled","Spelt/spelled","Spelling","Deletrear"],
+["Spend","Spent","Spent","Spending","Gastar"],["Spill","Spilt","Spilt","Spilling","Derramar"],
+["Split","Split","Split","Splitting","Dividir"],["Spoil","Spoilt","Spoilt","Spoiling","Estropear"],
+["Spread","Spread","Spread","Spreading","Extenderse"],["Stand","Stood","Stood","Standing","Estar de pie"],
+["Steal","Stole","Stolen","Stealing","Robar"],["Sting","Stung","Stung","Stinging","Picar"],
+["Stink","Stank","Stunk","Stinking","Apestar"],["Strike","Struck","Struck","Striking","Golpear"],
+["Swear","Swore","Sworn","Swearing","Jurar"],["Sweep","Swept","Swept","Sweeping","Trapear"],
+["Swim","Swam","Swum","Swimming","Nadar"],["Take","Took","Taken","Taking","Tomar"],
+["Teach","Taught","Taught","Teaching","Ensenar"],["Tear","Tore","Torn","Tearing","Rasgar"],
+["Tell","Told","Told","Telling","Decir"],["Think","Thought","Thought","Thinking","Pensar"],
+["Throw","Threw","Thrown","Throwing","Lanzar"],["Tread","Trode","Trodden/trod","Treading","Pisotear"],
+["Understand","Understood","Understood","Understanding","Entender"],["Wake","Woke","Woken","Waking","Despertarse"],
+["Wear","Wore","Worn","Wearing","Vestir"],["Weave","Wove","Woven","Weaving","Tejer"],
+["Weep","Wept","Wept","Weeping","Llorar"],["Win","Won","Won","Winning","Ganar"],
+["Wring","Wrung","Wrung","Wringing","Retorcer"],["Write","Wrote","Written","Writing","Escribir"]
+];
+
+/* ---- build gerund for regular verbs ---- */
+function computeGerund(present, past){
+  const p = present.toLowerCase();
+  if(p.endsWith('ee') || p.endsWith('oe')) return present + 'ing';
+  if(p.endsWith('ie')) return present.slice(0,-2) + 'ying';
+  if(p.endsWith('y')) return present + 'ing';
+  if(past.toLowerCase().endsWith('ed')){
+    const stem = past.slice(0, -2);
+    if(stem.toLowerCase() === p) return present + 'ing';
+    if(p.endsWith('e') && stem.toLowerCase() === p.slice(0,-1)) return stem + 'ing';
+    if(stem.toLowerCase() === p + p.slice(-1)) return stem + 'ing';
+    return present + 'ing';
+  }
+  return present + 'ing';
+}
+
+const IPA_DICT = {"accept":"əkˈsɛpt","accepted":"ækˈsɛptɪd","accepting":"əkˈsɛptɪŋ","achieve":"əˈʧiv","achieved":"əˈʧivd","achieving":"əˈʧivɪŋ","act":"ækt","acted":"ˈæktɪd","acting":"ˈæktɪŋ","admire":"ædˈmaɪr","admired":"ədˈmaɪərd","admiring":"ædˈmaɪrɪŋ","advise":"ədˈvaɪz","advised":"ədˈvaɪzd","advising":"ædˈvaɪzɪŋ","affect":"əˈfɛkt","affected":"əˈfɛktɪd","affecting":"əˈfɛktɪŋ","agree":"əˈgri","agreed":"əˈgrid","agreeing":"əˈgriɪŋ","amaze":"əˈmeɪz","amazed":"əˈmeɪzd","amazing":"əˈmeɪzɪŋ","amuse":"əmˈjuz","amused":"əmˈjuzd","amusing":"əmˈjuzɪŋ","answer":"ˈænsər","answered":"ˈænsərd","answering":"ˈænsərɪŋ","appear":"əˈpɪr","appeared":"əˈpɪrd","appearing":"əˈpɪrɪŋ","arise":"əraɪz","arisen":"ərˈɪzən","arising":"ərˈaɪzɪŋ","arose":"əroʊz","arrange":"əreɪnʤ","arranged":"əreɪnʤd","arranging":"ərˈeɪnʤɪŋ","arrive":"əraɪv","arrived":"əraɪvd","arriving":"ərˈaɪvɪŋ","ask":"æsk","asked":"æst","asking":"ˈæskɪŋ","ate":"eɪt","attack":"əˈtæk","attacked":"əˈtækt","attacking":"əˈtækɪŋ","bake":"beɪk","baked":"beɪkt","baking":"ˈbeɪkɪŋ","be":"bi","beat":"bit","beaten":"ˈbitən","beating":"ˈbitɪŋ","became":"bɪˈkeɪm","become":"bɪˈkəm","becoming":"bɪˈkəmɪŋ","been":"bɪn","began":"bɪˈgæn","begin":"bɪˈgɪn","beginning":"bɪˈgɪnɪŋ","begun":"ˈbeɪgən","behave":"bɪˈheɪv","behaved":"bɪˈheɪvd","behaving":"bɪˈheɪvɪŋ","being":"biɪŋ","believe":"bɪˈliv","believed":"bɪˈlivd","believing":"bɪˈlivɪŋ","belong":"bɪˈlɔŋ","belonged":"bɪˈlɔŋd","belonging":"bɪˈlɔŋɪŋ","bet":"bɛt","betting":"ˈbɛtɪŋ","bit":"bɪt","bite":"baɪt","biting":"ˈbaɪtɪŋ","bitten":"ˈbɪtən","blame":"bleɪm","blamed":"bleɪmd","blaming":"ˈbleɪmɪŋ","bled":"blɛd","bleed":"blid","bleeding":"ˈblidɪŋ","blew":"blu","blow":"bloʊ","blowing":"bloʊɪŋ","blown":"bloʊn","borrow":"ˈbɑˌroʊ","borrowed":"ˈbɑˌroʊd","borrowing":"ˈbɑroʊɪŋ","bother":"ˈbɑðər","bothered":"ˈbɑðərd","bothering":"ˈbɑðərɪŋ","bought":"bɔt","break":"breɪk","breaking":"ˈbreɪkɪŋ","bring":"brɪŋ","bringing":"ˈbrɪŋɪŋ","broke":"broʊk","broken":"ˈbroʊkən","brought":"brɔt","build":"bɪld","building":"ˈbɪldɪŋ","built":"bɪlt","buy":"baɪ","buying":"baɪɪŋ","call":"kɔl","called":"kɔld","calling":"ˈkɔlɪŋ","came":"keɪm","cancel":"ˈkænsəl","canceled":"ˈkænsəld","canceling":"ˈkænsəlɪŋ","carried":"ˈkɛrid","carry":"ˈkɛri","carrying":"ˈkɛriɪŋ","catch":"kæʧ","catching":"ˈkæʧɪŋ","caught":"kɔt","cause":"kɔz","caused":"kɔzd","causing":"ˈkɔzɪŋ","celebrate":"ˈsɛləˌbreɪt","celebrated":"ˈsɛləˌbreɪtɪd","celebrating":"ˈsɛləˌbreɪtɪŋ","change":"ʧeɪnʤ","changed":"ʧeɪnʤd","changing":"ˈʧeɪnʤɪŋ","chase":"ʧeɪs","chased":"ʧeɪst","chasing":"ˈʧeɪsɪŋ","chat":"ʧæt","chatted":"ˈʧætɪd","chatting":"ˈʧætɪŋ","check":"ʧɛk","checked":"ʧɛkt","checking":"ˈʧɛkɪŋ","choose":"ʧuz","choosing":"ˈʧuzɪŋ","chose":"ʧoʊz","chosen":"ˈʧoʊzən","clean":"klin","cleaned":"klind","cleaning":"ˈklinɪŋ","clear":"klɪr","cleared":"klɪrd","clearing":"ˈklɪrɪŋ","climb":"klaɪm","climbed":"klaɪmd","climbing":"ˈklaɪmɪŋ","close":"kloʊz","closed":"kloʊzd","closing":"ˈkloʊzɪŋ","come":"kəm","coming":"ˈkəmɪŋ","compare":"kəmˈpɛr","compared":"kəmˈpɛrd","comparing":"kəmˈpɛrɪŋ","compete":"kəmˈpit","competed":"kəmˈpitɪd","competing":"kəmˈpitɪŋ","complete":"kəmˈplit","completed":"kəmˈplitɪd","completing":"kəmˈplitɪŋ","contain":"kənˈteɪn","contained":"kənˈteɪnd","containing":"kənˈteɪnɪŋ","continue":"kənˈtɪnju","continued":"kənˈtɪnjud","continuing":"kənˈtɪnjuɪŋ","cook":"kʊk","cooked":"kʊkt","cooking":"ˈkʊkɪŋ","correct":"kərˈɛkt","corrected":"kərˈɛktɪd","correcting":"kərˈɛktɪŋ","cost":"kɔst","costing":"ˈkɔstɪŋ","cough":"kɔf","coughed":"kɔft","coughing":"ˈkɑfɪŋ","count":"kaʊnt","counted":"ˈkaʊntɪd","counting":"ˈkaʊntɪŋ","crash":"kræʃ","crashed":"kræʃt","crashing":"ˈkræʃɪŋ","create":"kriˈeɪt","created":"kriˈeɪtɪd","creating":"kriˈeɪtɪŋ","creep":"krip","creeping":"ˈkripɪŋ","crept":"krɛpt","cross":"krɔs","crossed":"krɔst","crossing":"ˈkrɔsɪŋ","curse":"kərs","cursed":"kərst","cursing":"ˈkərsɪŋ","cut":"kət","cutting":"ˈkətɪŋ","damage":"ˈdæmɪʤ","damaged":"ˈdæmɪʤd","damaging":"ˈdæmɪʤɪŋ","dance":"dæns","danced":"dænst","dancing":"ˈdænsɪŋ","date":"deɪt","dated":"ˈdeɪtɪd","dating":"ˈdeɪtɪŋ","deal":"dil","dealing":"ˈdilɪŋ","dealt":"dɛlt","decide":"ˌdɪˈsaɪd","decided":"ˌdɪˈsaɪdɪd","deciding":"ˌdɪˈsaɪdɪŋ","decrease":"ˈdiˌkris","decreased":"ˈdiˌkrist","decreasing":"ˈdiˌkrisɪŋ","deliver":"dɪˈlɪvər","delivered":"dɪˈlɪvərd","delivering":"dɪˈlɪvərɪŋ","depend":"dɪˈpɛnd","depended":"dɪˈpɛndɪd","depending":"dɪˈpɛndɪŋ","describe":"dɪˈskraɪb","described":"dɪˈskraɪbd","describing":"dɪˈskraɪbɪŋ","design":"dɪˈzaɪn","designed":"dɪˈzaɪnd","designing":"dɪˈzaɪnɪŋ","destroy":"dɪˈstrɔɪ","destroyed":"dɪˈstrɔɪd","destroying":"dɪˈstrɔɪɪŋ","did":"dɪd","die":"daɪ","died":"daɪd","disagree":"dɪsəˈgri","disagreed":"dɪsəˈgrid","disagreeing":"dɪsəˈgriɪŋ","discover":"dɪˈskəvər","discovered":"dɪˈskəvərd","discovering":"dɪˈskəvərɪŋ","discuss":"dɪˈskəs","discussed":"dɪˈskəst","discussing":"dɪˈskəsɪŋ","disturb":"dɪˈstərb","disturbed":"dɪˈstərbd","disturbing":"dɪˈstərbɪŋ","do":"du","doing":"duɪŋ","done":"dən","drank":"dræŋk","draw":"drɔ","drawing":"drɔɪŋ","drawn":"drɔn","dream":"drim","dreaming":"ˈdrimɪŋ","dreamt":"drɛmt","dress":"drɛs","dressed":"drɛst","dressing":"ˈdrɛsɪŋ","drew":"dru","dried":"draɪd","drink":"drɪŋk","drinking":"ˈdrɪŋkɪŋ","drive":"draɪv","driven":"ˈdrɪvən","driving":"ˈdraɪvɪŋ","drove":"droʊv","drunk":"drəŋk","dry":"draɪ","drying":"draɪɪŋ","dying":"daɪɪŋ","eat":"it","eaten":"ˈitən","eating":"ˈitɪŋ","eliminate":"ɪˈlɪməˌneɪt","eliminated":"ɪˈlɪməˌneɪtɪd","eliminating":"ɪˈlɪməˌneɪtɪŋ","end":"ɛnd","ended":"ˈɛndɪd","ending":"ˈɛndɪŋ","enjoy":"ˌɛnˈʤɔɪ","enjoyed":"ˌɛnˈʤɔɪd","enjoying":"ˌɛnˈʤɔɪɪŋ","entertain":"ˌɛnərˈteɪn","entertained":"ˌɛnərˈteɪnd","entertaining":"ˌɛnərˈteɪnɪŋ","excuse":"ɪkˈskjuz","excused":"ɪkˈskjuzd","excusing":"ɪkˈskjuzɪŋ","exercise":"ˈɛksərˌsaɪz","exercised":"ˈɛksərˌsaɪzd","exercising":"ˈɛksərˌsaɪzɪŋ","exhibit":"ɪgˈzɪbɪt","exhibited":"ɪgˈzɪbətəd","exhibiting":"ɪgˈzɪbɪtɪŋ","expect":"ɪkˈspɛkt","expected":"ɪkˈspɛktɪd","expecting":"ɪkˈspɛktɪŋ","express":"ɪkˈsprɛs","expressed":"ɪkˈsprɛst","expressing":"ɪkˈsprɛsɪŋ","fall":"fɔl","fallen":"ˈfɑlən","falling":"ˈfɑlɪŋ","fed":"fɛd","feed":"fid","feeding":"ˈfidɪŋ","feel":"fil","feeling":"ˈfilɪŋ","fell":"fɛl","felt":"fɛlt","fight":"faɪt","fighting":"ˈfaɪtɪŋ","fill":"fɪl","filled":"fɪld","filling":"ˈfɪlɪŋ","film":"fɪlm","filmed":"fɪlmd","filming":"ˈfɪlmɪŋ","find":"faɪnd","finding":"ˈfaɪndɪŋ","fish":"fɪʃ","fished":"fɪʃt","fishing":"ˈfɪʃɪŋ","fix":"fɪks","fixed":"fɪkst","fixing":"ˈfɪksɪŋ","fled":"flɛd","flee":"fli","fleeing":"fliɪŋ","flew":"flu","flown":"floʊn","fly":"flaɪ","flying":"flaɪɪŋ","follow":"ˈfɑloʊ","followed":"ˈfɑloʊd","following":"ˈfɑloʊɪŋ","forgave":"fərˈgeɪv","forget":"fərˈgɛt","forgetting":"fərˈgɛtɪŋ","forgive":"fərˈgɪv","forgiven":"fərˈgɪvən","forgiving":"fərˈgɪvɪŋ","forgot":"fərˈgɑt","forgotten":"fərˈgɑtən","forsake":"fɔrˈseɪk","forsaken":"fɔrˈseɪkən","forsaking":"fɔrˈseɪkɪŋ","forsook":"fɔrˈsʊk","fought":"fɔt","found":"faʊnd","free":"fri","freed":"frid","freeing":"friɪŋ","freeze":"friz","freezing":"ˈfrizɪŋ","fried":"frid","froze":"froʊz","frozen":"ˈfroʊzən","fry":"fraɪ","frying":"fraɪɪŋ","gave":"geɪv","get":"gɪt","getting":"ˈgɪtɪŋ","give":"gɪv","given":"ˈgɪvɪn","giving":"ˈgɪvɪŋ","go":"goʊ","going":"goʊɪŋ","gone":"gɔn","got":"gɑt","greet":"grit","greeted":"ˈgritɪd","greeting":"ˈgritɪŋ","grew":"gru","grind":"graɪnd","grinding":"ˈgraɪndɪŋ","ground":"graʊnd","grow":"groʊ","growing":"groʊɪŋ","grown":"groʊn","guess":"gɛs","guessed":"gɛst","guessing":"ˈgɛsɪŋ","had":"hæd","hail":"heɪl","hailed":"heɪld","hailing":"ˈheɪlɪŋ","handle":"ˈhændəl","handled":"ˈhændəld","handling":"ˈhændəlɪŋ","hang":"hæŋ","hanging":"ˈhæŋɪŋ","happen":"ˈhæpən","happened":"ˈhæpənd","happening":"ˈhæpənɪŋ","hate":"heɪt","hated":"ˈheɪtɪd","hating":"ˈheɪtɪŋ","have":"hæv","having":"ˈhævɪŋ","hear":"hir","heard":"hərd","hearing":"ˈhirɪŋ","held":"hɛld","help":"hɛlp","helped":"hɛlpt","helping":"ˈhɛlpɪŋ","hid":"hɪd","hidden":"ˈhɪdən","hide":"haɪd","hiding":"ˈhaɪdɪŋ","hit":"hɪt","hitting":"ˈhɪtɪŋ","hold":"hoʊld","holding":"ˈhoʊldɪŋ","hope":"hoʊp","hoped":"hoʊpt","hoping":"ˈhoʊpɪŋ","hung":"həŋ","hunt":"hənt","hunted":"ˈhənɪd","hunting":"ˈhəntɪŋ","hurt":"hərt","hurting":"ˈhərtɪŋ","identified":"aɪˈdɛntəˌfaɪd","identify":"aɪˈdɛntəˌfaɪ","identifying":"aɪˈdɛntəˌfaɪɪŋ","ignore":"ˌɪgˈnɔr","ignored":"ˌɪgˈnɔrd","ignoring":"ˌɪgˈnɔrɪŋ","imagine":"ˌɪˈmæʤən","imagined":"ˌɪˈmæʤənd","imagining":"ˌɪˈmæʤənɪŋ","impress":"ˌɪmˈprɛs","impressed":"ˌɪmˈprɛst","impressing":"ˌɪmˈprɛsɪŋ","improve":"ˌɪmˈpruv","improved":"ˌɪmˈpruvd","improving":"ˌɪmˈpruvɪŋ","include":"ˌɪnˈklud","included":"ˌɪnˈkludɪd","including":"ˌɪnˈkludɪŋ","increase":"ˌɪnˈkris","increased":"ˌɪnˈkrist","increasing":"ˌɪnˈkrisɪŋ","interview":"ˈɪntərvˌju","interviewed":"ˈɪntərvˌjud","interviewing":"ˈɪntərvˌjuɪŋ","introduce":"ˌɪntrəˈdus","introduced":"ˌɪntrəˈdust","introducing":"ˌɪntrəˈdusɪŋ","invite":"ˌɪnˈvaɪt","invited":"ˌɪnˈvaɪtɪd","inviting":"ˌɪnˈvaɪtɪŋ","jog":"ʤɑg","jogged":"ʤɑgd","jogging":"ˈʤɔgɪŋ","join":"ʤɔɪn","joined":"ʤɔɪnd","joining":"ˈʤɔɪnɪŋ","jump":"ʤəmp","jumped":"ʤəmpt","jumping":"ˈʤəmpɪŋ","keep":"kip","keeping":"ˈkipɪŋ","kept":"kɛpt","kneel":"nil","kneeling":"ˈnilɪŋ","knelt":"nɛlt","knew":"nu","knock":"nɑk","knocked":"nɑkt","knocking":"ˈnɑkɪŋ","know":"noʊ","knowing":"noʊɪŋ","known":"noʊn","label":"ˈleɪbəl","labeled":"ˈleɪbəld","labeling":"ˈleɪbəlɪŋ","lain":"leɪn","land":"lænd","landed":"ˈlændɪd","landing":"ˈlændɪŋ","last":"læst","lasted":"ˈlæstɪd","lasting":"ˈlæstɪŋ","lay":"leɪ","lead":"lɛd","leading":"ˈlidɪŋ","learn":"lərn","learned":"ˈlərnɪd","learning":"ˈlərnɪŋ","learnt":"lərnt","leave":"liv","leaving":"ˈlivɪŋ","led":"lɛd","left":"lɛft","lend":"lɛnd","lending":"ˈlɛndɪŋ","lent":"lɛnt","let":"lɛt","letting":"ˈlɛtɪŋ","lie":"laɪ","like":"laɪk","liked":"laɪkt","liking":"ˈlaɪkɪŋ","link":"lɪŋk","linked":"lɪŋkt","linking":"ˈlɪŋkɪŋ","list":"lɪst","listed":"ˈlɪstɪd","listen":"ˈlɪsən","listened":"ˈlɪsənd","listening":"ˈlɪsənɪŋ","listing":"ˈlɪstɪŋ","live":"lɪv","lived":"lɪvd","living":"ˈlɪvɪŋ","locate":"ˈloʊˌkeɪt","located":"ˈloʊˌkeɪtəd","locating":"ˈloʊˌkeɪtɪŋ","look":"lʊk","looked":"lʊkt","looking":"ˈlʊkɪŋ","lose":"luz","losing":"ˈluzɪŋ","lost":"lɔst","love":"ləv","loved":"ləvd","loving":"ˈləvɪŋ","lying":"laɪɪŋ","made":"meɪd","make":"meɪk","making":"ˈmeɪkɪŋ","manage":"ˈmænɪʤ","managed":"ˈmænɪʤd","managing":"ˈmænəʤɪŋ","mark":"mɑrk","marked":"mɑrkt","marking":"ˈmɑrkɪŋ","match":"mæʧ","matched":"mæʧt","matching":"ˈmæʧɪŋ","mean":"min","meaning":"ˈminɪŋ","meant":"mɛnt","measure":"ˈmɛʒər","measured":"ˈmɛʒərd","measuring":"ˈmɛʒərɪŋ","meet":"mit","meeting":"ˈmitɪŋ","mention":"ˈmɛnʃən","mentioned":"ˈmɛnʃənd","mentioning":"ˈmɛnʃənɪŋ","met":"mɛt","miss":"mɪs","missed":"mɪst","missing":"ˈmɪsɪŋ","move":"muv","moved":"muvd","moving":"ˈmuvɪŋ","name":"neɪm","named":"neɪmd","naming":"ˈneɪmɪŋ","need":"nid","needed":"ˈnidɪd","needing":"ˈnidɪŋ","note":"noʊt","noted":"ˈnoʊtɪd","notice":"ˈnoʊtɪs","noticed":"ˈnoʊtɪst","noticing":"ˈnoʊtɪsɪŋ","noting":"ˈnoʊtɪŋ","number":"ˈnəmbər","numbered":"ˈnəmbərd","numbering":"ˈnəmbərɪŋ","offer":"ˈɔfər","offered":"ˈɔfərd","offering":"ˈɔfərɪŋ","open":"ˈoʊpən","opened":"ˈoʊpənd","opening":"ˈoʊpənɪŋ","order":"ˈɔrdər","ordered":"ˈɔrdərd","ordering":"ˈɔrdərɪŋ","organize":"ˈɔrgəˌnaɪz","organized":"ˈɔrgəˌnaɪzd","organizing":"ˈɔrgəˌnaɪzɪŋ","pack":"pæk","packed":"pækt","packing":"ˈpækɪŋ","paid":"peɪd","paint":"peɪnt","painted":"ˈpeɪnɪd","painting":"ˈpeɪnɪŋ","pamper":"ˈpæmpər","pampered":"ˈpæmpərd","pampering":"ˈpæmpərɪŋ","pardon":"ˈpɑrdən","pardoned":"ˈpɑrdənd","pardoning":"ˈpɑrdənɪŋ","park":"pɑrk","parked":"pɑrkt","parking":"ˈpɑrkɪŋ","participate":"pɑrˈtɪsəˌpeɪt","participated":"pɑrˈtɪsəˌpeɪtɪd","participating":"pɑrˈtɪsəˌpeɪtɪŋ","pass":"pæs","passed":"pæst","passing":"ˈpæsɪŋ","pay":"peɪ","paying":"peɪɪŋ","perform":"pərˈfɔrm","performed":"pərˈfɔrmd","performing":"pərˈfɔrmɪŋ","persuade":"pərsˈweɪd","persuaded":"pərsˈweɪdɪd","persuading":"pərsˈweɪdɪŋ","pick":"pɪk","picked":"pɪkt","picking":"ˈpɪkɪŋ","plan":"plæn","planned":"plænd","planning":"ˈplænɪŋ","play":"pleɪ","played":"pleɪd","playing":"pleɪɪŋ","please":"pliz","pleased":"plizd","pleasing":"ˈplizɪŋ","practice":"ˈpræktɪs","practiced":"ˈpræktɪst","practicing":"ˈpræktɪsɪŋ","predict":"prɪˈdɪkt","predicted":"prɪˈdɪktɪd","predicting":"prɪˈdɪktɪŋ","prefer":"prɪˈfər","preferred":"prɪˈfərd","preferring":"prɪˈfərɪŋ","present":"ˈprɛzənt","presented":"pərˈzɛnəd","presenting":"prɪˈzɛntɪŋ","program":"ˈproʊˌgræm","programmed":"ˈproʊˌgræmd","programming":"ˈproʊˌgræmɪŋ","protect":"prəˈtɛkt","protected":"prəˈtɛktɪd","protecting":"prəˈtɛktɪŋ","provide":"prəˈvaɪd","provided":"prəˈvaɪdɪd","providing":"prəˈvaɪdɪŋ","purchase":"ˈpərʧəs","purchased":"ˈpərʧəst","purchasing":"ˈpərʧəsɪŋ","push":"pʊʃ","pushed":"pʊʃt","pushing":"ˈpʊʃɪŋ","put":"pʊt","putting":"ˈpʊtɪŋ","quit":"kwɪt","quitting":"kˈwɪtɪŋ","rain":"reɪn","rained":"reɪnd","raining":"ˈreɪnɪŋ","ran":"ræn","rang":"ræŋ","read":"rɛd","reading":"ˈrɛdɪŋ","receive":"rɪˈsiv","received":"rɪˈsivd","receiving":"rɪˈsivɪŋ","recommend":"ˌrɛkəˈmɛnd","recommended":"ˌrɛkəˈmɛndɪd","recommending":"ˌrɛkəˈmɛndɪŋ","relate":"rɪˈleɪt","related":"rɪˈleɪtɪd","relating":"rɪˈleɪtɪŋ","relax":"rɪˈlæks","relaxed":"rɪˈlækst","relaxing":"rɪˈlæksɪŋ","release":"riˈlis","released":"riˈlist","releasing":"riˈlisɪŋ","remember":"rɪˈmɛmbər","remembered":"rɪˈmɛmbərd","remembering":"rɪˈmɛmbərɪŋ","repair":"rɪˈpɛr","repaired":"rɪˈpɛrd","repairing":"rɪˈpɛrɪŋ","repeat":"rɪˈpit","repeated":"rɪˈpitɪd","repeating":"rɪˈpitɪŋ","resist":"rɪˈzɪst","resisted":"rɪˈzɪstɪd","resisting":"rɪˈzɪstɪŋ","rest":"rɛst","rested":"ˈrɛstɪd","resting":"ˈrɛstɪŋ","return":"rɪˈtərn","returned":"rɪˈtərnd","returning":"rɪˈtərnɪŋ","review":"ˌrivˈju","reviewed":"rivˈjud","reviewing":"rivˈjuɪŋ","ridden":"ˈrɪdən","ride":"raɪd","riding":"ˈraɪdɪŋ","ring":"rɪŋ","ringing":"ˈrɪŋɪŋ","rise":"raɪz","risen":"ˈrɪzən","rising":"ˈraɪzɪŋ","rode":"roʊd","rose":"roʊz","run":"rən","rung":"rəŋ","running":"ˈrənɪŋ","said":"sɛd","sail":"seɪl","sailed":"seɪld","sailing":"ˈseɪlɪŋ","sang":"sæŋ","sank":"sæŋk","sat":"sæt","save":"seɪv","saved":"seɪvd","saving":"ˈseɪvɪŋ","saw":"sɔ","say":"seɪ","saying":"seɪɪŋ","scan":"skæn","scanned":"skænd","scanning":"ˈskænɪŋ","scare":"skɛr","scared":"skɛrd","scaring":"ˈskɛrɪŋ","see":"si","seeing":"siɪŋ","seen":"sin","sell":"sɛl","selling":"ˈsɛlɪŋ","send":"sɛnd","sending":"ˈsɛndɪŋ","sent":"sɛnt","set":"sɛt","setting":"ˈsɛtɪŋ","sew":"soʊ","sewed":"soʊd","sewing":"soʊɪŋ","sewn":"soʊn","shake":"ʃeɪk","shaken":"ˈʃeɪkən","shaking":"ˈʃeɪkɪŋ","share":"ʃɛr","shared":"ʃɛrd","sharing":"ˈʃɛrɪŋ","shine":"ʃaɪn","shining":"ˈʃaɪnɪŋ","shone":"ʃoʊn","shook":"ʃʊk","shoot":"ʃut","shooting":"ˈʃutɪŋ","shop":"ʃɑp","shopped":"ʃɑpt","shopping":"ˈʃɑpɪŋ","shot":"ʃɑt","shout":"ʃaʊt","shouted":"ˈʃaʊtɪd","shouting":"ˈʃaʊtɪŋ","show":"ʃoʊ","showed":"ʃoʊd","showing":"ʃoʊɪŋ","shown":"ʃoʊn","shrank":"ʃræŋk","shrink":"ʃrɪŋk","shrinking":"ʃˈrɪŋkɪŋ","shrunk":"ʃrəŋk","shut":"ʃət","shutting":"ˈʃətɪŋ","sing":"sɪŋ","singing":"ˈsɪŋɪŋ","sink":"sɪŋk","sinking":"ˈsɪŋkɪŋ","sit":"sɪt","sitting":"ˈsɪtɪŋ","skate":"skeɪt","skated":"ˈskeɪtɪd","skating":"ˈskeɪtɪŋ","ski":"ski","skied":"skid","skiing":"skiɪŋ","sleep":"slip","sleeping":"sˈlipɪŋ","slept":"slɛpt","slid":"slɪd","slide":"slaɪd","sliding":"sˈlaɪdɪŋ","slow":"sloʊ","slowed":"sloʊd","slowing":"sloʊɪŋ","sneeze":"sniz","sneezed":"snizd","sneezing":"sˈnizɪŋ","snow":"snoʊ","snowed":"snoʊd","snowing":"snoʊɪŋ","sold":"soʊld","solve":"sɑlv","solved":"sɑlvd","solving":"ˈsɑlvɪŋ","sow":"soʊ","sowed":"soʊd","sowing":"soʊɪŋ","sown":"soʊn","speak":"spik","speaking":"ˈspikɪŋ","spell":"spɛl","spelled":"spɛld","spelling":"ˈspɛlɪŋ","spelt":"spɛlt","spend":"spɛnd","spending":"ˈspɛndɪŋ","spent":"spɛnt","spill":"spɪl","spilling":"ˈspɪlɪŋ","spilt":"spɪlt","split":"splɪt","splitting":"ˈsplɪtɪŋ","spoil":"spɔɪl","spoiling":"ˈspɔɪlɪŋ","spoilt":"spɔɪlt","spoke":"spoʊk","spoken":"ˈspoʊkən","spread":"sprɛd","spreading":"ˈsprɛdɪŋ","stand":"stænd","standing":"ˈstændɪŋ","stank":"stæŋk","start":"stɑrt","started":"ˈstɑrtɪd","starting":"ˈstɑrtɪŋ","steal":"stil","stealing":"ˈstilɪŋ","step":"stɛp","stepped":"stɛpt","stepping":"ˈstɛpɪŋ","sting":"stɪŋ","stinging":"ˈstɪŋɪŋ","stink":"stɪŋk","stinking":"ˈstɪŋkɪŋ","stole":"stoʊl","stolen":"ˈstoʊlən","stood":"stʊd","stop":"stɑp","stopped":"stɑpt","stopping":"ˈstɑpɪŋ","stress":"strɛs","stressed":"strɛst","stressing":"ˈstrɛsɪŋ","strike":"straɪk","striking":"ˈstraɪkɪŋ","struck":"strək","studied":"ˈstədid","study":"ˈstədi","studying":"ˈstədiɪŋ","stung":"stəŋ","stunk":"stəŋk","substitute":"ˈsəbstəˌtut","substituted":"ˈsəbstəˌtutəd","substituting":"ˈsəbstɪˌtutɪŋ","suggest":"səˈʤɛst","suggested":"səˈʤɛstɪd","suggesting":"səˈʤɛstɪŋ","sung":"səŋ","sunk":"səŋk","surprise":"səˈpraɪz","surprised":"səˈpraɪzd","surprising":"səˈpraɪzɪŋ","swam":"swæm","swear":"swɛr","swearing":"sˈwɛrɪŋ","sweep":"swip","sweeping":"sˈwipɪŋ","swept":"swɛpt","swim":"swɪm","swimming":"sˈwɪmɪŋ","swore":"swɔr","sworn":"swɔrn","swum":"swəm","take":"teɪk","taken":"ˈteɪkən","taking":"ˈteɪkɪŋ","talk":"tɔk","talked":"tɔkt","talking":"ˈtɔkɪŋ","taste":"teɪst","tasted":"ˈteɪstɪd","tasting":"ˈteɪstɪŋ","taught":"tɔt","teach":"tiʧ","teaching":"ˈtiʧɪŋ","tear":"tɪr","tearing":"ˈtɪrɪŋ","tell":"tɛl","telling":"ˈtɛlɪŋ","terrorize":"ˈtɛrəˌraɪz","terrorized":"ˈtɛrəˌraɪzd","terrorizing":"ˈtɛrəˌraɪzɪŋ","thank":"θæŋk","thanked":"θæŋkt","thanking":"ˈθæŋkɪŋ","think":"θɪŋk","thinking":"ˈθɪŋkɪŋ","thought":"θɔt","threw":"θru","throw":"θroʊ","throwing":"θroʊɪŋ","thrown":"θroʊn","told":"toʊld","took":"tʊk","tore":"tɔr","torn":"tɔrn","touch":"təʧ","touched":"təʧt","touching":"ˈtəʧɪŋ","travel":"ˈtrævəl","traveled":"ˈtrævəld","traveling":"ˈtrævəlɪŋ","tread":"trɛd","treading":"ˈtrɛdɪŋ","tried":"traɪd","trod":"trɑd","trodden":"ˈtrɑdən","trode":"troʊd","try":"traɪ","trying":"traɪɪŋ","tune":"tun","tuned":"tund","tuning":"ˈtunɪŋ","turn":"tərn","turned":"tərnd","turning":"ˈtərnɪŋ","underline":"ˈəndərˌlaɪn","underlined":"ˈəndərˌlaɪnd","underlining":"ˈəndərˌlaɪnɪŋ","understand":"ˌəndərˈstænd","understanding":"ˌəndərˈstændɪŋ","understood":"ˌəndərˈstʊd","use":"juz","used":"juzd","using":"ˈjuzɪŋ","varied":"ˈvɛrid","vary":"ˈvɛri","varying":"ˈvɛriɪŋ","wait":"weɪt","waited":"ˈweɪtɪd","waiting":"ˈweɪtɪŋ","wake":"weɪk","waking":"ˈweɪkɪŋ","walk":"wɔk","walked":"wɔkt","walking":"ˈwɔkɪŋ","want":"wɔnt","wanted":"ˈwɔntɪd","wanting":"ˈwɑnɪŋ","warn":"wɔrn","warned":"wɔrnd","warning":"ˈwɔrnɪŋ","was":"wɑz","wash":"wɑʃ","washed":"wɑʃt","washing":"ˈwɑʃɪŋ","watch":"wɔʧ","watched":"wɔʧt","watching":"ˈwɑʧɪŋ","water":"ˈwɔtər","watered":"ˈwɔtərd","watering":"ˈwɔtərɪŋ","wear":"wɛr","wearing":"ˈwɛrɪŋ","weave":"wiv","weaving":"ˈwivɪŋ","weep":"wip","weeping":"ˈwipɪŋ","welcome":"ˈwɛlkəm","welcomed":"ˈwɛlkəmd","welcoming":"ˈwɛlkəmɪŋ","went":"wɛnt","wept":"wɛpt","were":"wər","win":"wɪn","winning":"ˈwɪnɪŋ","wish":"wɪʃ","wished":"wɪʃt","wishing":"ˈwɪʃɪŋ","witness":"ˈwɪtnəs","witnessed":"ˈwɪtnəst","witnessing":"ˈwɪtnəsɪŋ","woke":"woʊk","woken":"ˈwoʊkən","won":"wən","wore":"wɔr","work":"wərk","worked":"wərkt","working":"ˈwərkɪŋ","worn":"wɔrn","worried":"ˈwərid","worry":"ˈwəri","worrying":"ˈwəriɪŋ","wove":"woʊv","woven":"ˈwoʊvən","wrestle":"ˈrɛsəl","wrestled":"ˈrɛsəld","wrestling":"ˈrɛsəlɪŋ","wring":"rɪŋ","wringing":"ˈrɪŋɪŋ","write":"raɪt","writing":"ˈraɪtɪŋ","written":"ˈrɪtən","wrote":"roʊt","wrung":"rəŋ"};
+
+/* =====================================================
+   STANDARD AMERICAN ENGLISH PHONETICS (real IPA)
+   Looked up from a CMU Pronouncing Dictionary-based table,
+   not a heuristic guess.
+   ===================================================== */
+function ipaForField(str){
+  if(!str) return '';
+  if(str.includes('/')){
+    return str.split('/').map(w => IPA_DICT[w.trim().toLowerCase()] || w.trim()).join('/');
+  }
+  if(str.includes(',')){
+    return str.split(',').map(w => IPA_DICT[w.trim().toLowerCase()] || w.trim()).join(', ');
+  }
+  return IPA_DICT[str.trim().toLowerCase()] || str.trim();
+}
+
+const REGULARS = REGULARS_RAW.map(([present,past,spanish])=>{
+  const gerund = computeGerund(present,past);
+  return {
+    present, past, participle:past, gerund, spanish,
+    presentPh: ipaForField(present),
+    pastPh: ipaForField(past),
+    participlePh: ipaForField(past),
+    gerundPh: ipaForField(gerund)
+  };
+});
+const IRREGULARS_OBJ = IRREGULARS.map(([present,past,participle,gerund,spanish])=>{
+  return {
+    present, past, participle, gerund, spanish,
+    presentPh: ipaForField(present),
+    pastPh: ipaForField(past),
+    participlePh: ipaForField(participle),
+    gerundPh: ipaForField(gerund)
+  };
+});
+
+/* =====================================================
+   VERB LIST TABLES
+   (kept for future phases; tables live inside the hidden
+   legacy-app container for now)
+   ===================================================== */
+function fillTable(tbodyId, list){
+  const tbody = document.getElementById(tbodyId);
+  let html = '';
+  list.forEach((v,i)=>{
+    html += `<tr><td class="num">${i+1}</td>`
+      + `<td>${v.present}<span class="cell-phonetic">/${v.presentPh}/</span></td>`
+      + `<td>${v.past}<span class="cell-phonetic">/${v.pastPh}/</span></td>`
+      + `<td>${v.participle}<span class="cell-phonetic">/${v.participlePh}/</span></td>`
+      + `<td>${v.gerund}<span class="cell-phonetic">/${v.gerundPh}/</span></td>`
+      + `<td>${v.spanish}</td></tr>`;
+  });
+  tbody.innerHTML = html;
+}
+fillTable('tblReg', REGULARS);
+fillTable('tblIrr', IRREGULARS_OBJ);
+
+/* =====================================================
+   IRREGULAR VERB CLASSIFICATION HELPERS
+   (used by the Pattern and Sound/Rhyme cropping filters)
+   ===================================================== */
+function classifyPattern(v){
+  const p = v.present.toLowerCase(), pa = v.past.toLowerCase(), pp = v.participle.toLowerCase();
+  if(p === pa && pa === pp) return 'AAA';
+  if(p === pp && p !== pa) return 'ABA';
+  if(pa === pp && p !== pa) return 'ABB';
+  return 'ABC';
+}
+const PATTERN_LABELS = {
+  AAA: 'AAA \u2013 all 3 forms identical (e.g. put, put, put)',
+  ABA: 'ABA \u2013 present = participle (e.g. run, ran, run)',
+  ABB: 'ABB \u2013 past = participle (e.g. buy, bought, bought)',
+  ABC: 'ABC \u2013 all 3 forms different (e.g. go, went, gone)'
+};
+
+function rhymeKeyOf(v){
+  const ph = (v.pastPh || '').replace(/[ˈˌ.]/g, '');
+  return ph.length >= 2 ? ph.slice(-2) : ph;
+}
+
+const IRR_WITH_NUM = IRREGULARS_OBJ.map((v,i)=>({...v, num:i+1, group:'Irregular'}));
+const REG_WITH_NUM = REGULARS.map((v,i)=>({...v, num:i+1, group:'Regular'}));
+
+// Pre-compute rhyme groups (only keep groups with 2+ verbs so the
+// filter is actually useful for practice)
+const RHYME_GROUPS = {};
+IRR_WITH_NUM.forEach(v=>{
+  const key = rhymeKeyOf(v);
+  if(!RHYME_GROUPS[key]) RHYME_GROUPS[key] = [];
+  RHYME_GROUPS[key].push(v);
+});
+const RHYME_KEYS = Object.keys(RHYME_GROUPS)
+  .filter(k => RHYME_GROUPS[k].length >= 2)
+  .sort((a,b) => RHYME_GROUPS[b].length - RHYME_GROUPS[a].length);
+
+const IRR_BLOCK_SIZE = 10;
+const IRR_BLOCK_COUNT = Math.ceil(IRR_WITH_NUM.length / IRR_BLOCK_SIZE);
+
+/* =====================================================
+   PRACTICE STATE
+   ===================================================== */
+let level = 'beginner';        // 'beginner' | 'expert'
+let listType = 'reg';          // 'reg' | 'irr' | 'mix'
+let irrFilterType = 'full';    // 'full' | 'blocks' | 'pattern' | 'rhyme'
+let irrBlockIndex = 1;
+let irrPatternValue = 'AAA';
+let irrRhymeValue = RHYME_KEYS[0] || '';
+let orderType = 'seq';         // 'seq' | 'rand'
+
+let pool = [];
+let deck = [];
+let deckIndex = 0;
+let current = null;
+let stats = {intentos:0, aciertos:0, racha:0};
+let locked = false;
+let lockedB = false;
+let sessionMistakes = {}; // key -> {present, count}  (kept for the whole session, not reset by filter changes)
+
+/* ---- pool construction ---- */
+function getFilteredIrregulars(){
+  let base = IRR_WITH_NUM;
+  if(irrFilterType === 'blocks'){
+    const start = (irrBlockIndex - 1) * IRR_BLOCK_SIZE + 1;
+    const end = Math.min(start + IRR_BLOCK_SIZE - 1, IRR_WITH_NUM.length);
+    base = base.filter(v => v.num >= start && v.num <= end);
+  } else if(irrFilterType === 'pattern'){
+    base = base.filter(v => classifyPattern(v) === irrPatternValue);
+  } else if(irrFilterType === 'rhyme'){
+    base = base.filter(v => rhymeKeyOf(v) === irrRhymeValue);
+  }
+  return base;
+}
+
+function buildPool(){
+  if(listType === 'reg') pool = REG_WITH_NUM.slice();
+  else if(listType === 'irr') pool = getFilteredIrregulars().slice();
+  else pool = [...REG_WITH_NUM, ...IRR_WITH_NUM];
+  reshuffleDeck();
+}
+
+function reshuffleDeck(){
+  if(orderType === 'rand'){
+    deck = shuffle(pool);
+  } else {
+    deck = pool.slice().sort((a,b)=>{
+      if(a.group !== b.group) return a.group === 'Regular' ? -1 : 1;
+      return a.num - b.num;
+    });
+  }
+  deckIndex = 0;
+}
+
+function drawNextVerb(){
+  if(pool.length === 0) return null;
+  // once every verb in the deck has been shown, start a fresh deck
+  // (so a verb never repeats until all others in the pool have appeared)
+  if(deckIndex >= deck.length){
+    reshuffleDeck();
+  }
+  const v = deck[deckIndex];
+  deckIndex++;
+  return v;
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function normalize(str, isSpanish){
+  let s = (str||'').trim().toLowerCase();
+  if(isSpanish){
+    s = s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  }
+  return s;
+}
+
+function acceptableAnswers(field, isSpanish){
+  return field.split(/[\/,]/).map(a=>normalize(a, isSpanish)).filter(a=>a.length>0);
+}
+
+function primaryForm(field){
+  return field.split(/[\/,]/)[0].trim();
+}
+
+/* =====================================================
+   SETUP UI (level / list / irregular filter / order)
+   ===================================================== */
+function setActiveInGroup(groupEl, activeBtn){
+  groupEl.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
+  activeBtn.classList.add('active');
+}
+
+function populateBlockSelect(){
+  const sel = document.getElementById('blockSelect');
+  let html = '';
+  for(let i=1;i<=IRR_BLOCK_COUNT;i++){
+    const start = (i-1)*IRR_BLOCK_SIZE + 1;
+    const end = Math.min(start + IRR_BLOCK_SIZE - 1, IRR_WITH_NUM.length);
+    html += `<option value="${i}">Block ${i} (${start}-${end})</option>`;
+  }
+  sel.innerHTML = html;
+  sel.value = String(irrBlockIndex);
+}
+
+function populatePatternSelect(){
+  const sel = document.getElementById('patternSelect');
+  const counts = {AAA:0, ABA:0, ABB:0, ABC:0};
+  IRR_WITH_NUM.forEach(v => counts[classifyPattern(v)]++);
+  sel.innerHTML = Object.keys(PATTERN_LABELS).map(key =>
+    `<option value="${key}">${PATTERN_LABELS[key]} \u2013 ${counts[key]} verbs</option>`
+  ).join('');
+  sel.value = irrPatternValue;
+}
+
+function populateRhymeSelect(){
+  const sel = document.getElementById('rhymeSelect');
+  sel.innerHTML = RHYME_KEYS.map(key=>{
+    const group = RHYME_GROUPS[key];
+    const examples = group.slice(0,3).map(v=>v.past).join(', ');
+    return `<option value="${key}">"-${key}" (${group.length} verbs: ${examples}${group.length>3?'...':''})</option>`;
+  }).join('');
+  if(!irrRhymeValue) irrRhymeValue = RHYME_KEYS[0] || '';
+  sel.value = irrRhymeValue;
+}
+
+function updateIrrFilterVisibility(){
+  document.getElementById('irrFilterGroup').style.display = (listType === 'irr') ? '' : 'none';
+  document.getElementById('blockSelectWrap').style.display = (irrFilterType === 'blocks') ? '' : 'none';
+  document.getElementById('patternSelectWrap').style.display = (irrFilterType === 'pattern') ? '' : 'none';
+  document.getElementById('rhymeSelectWrap').style.display = (irrFilterType === 'rhyme') ? '' : 'none';
+}
+
+function updatePoolInfo(){
+  document.getElementById('poolInfo').textContent =
+    pool.length + (pool.length === 1 ? ' verb' : ' verbs') + ' in the current pool';
+}
+
+function toggleLevelUI(){
+  document.getElementById('expertCard').style.display = (level === 'expert') ? '' : 'none';
+  document.getElementById('beginnerCard').style.display = (level === 'beginner') ? '' : 'none';
+}
+
+function resetAndRebuild(){
+  stats = {intentos:0, aciertos:0, racha:0};
+  updateStatsUI();
+  buildPool();
+  updatePoolInfo();
+  pickVerb();
+}
+
+/* ---- level buttons ---- */
+document.querySelectorAll('#levelGroup .opt-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    setActiveInGroup(document.getElementById('levelGroup'), btn);
+    level = btn.dataset.level;
+    toggleLevelUI();
+    resetAndRebuild();
+  });
+});
+
+/* ---- list buttons ---- */
+document.querySelectorAll('#listGroup .opt-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    setActiveInGroup(document.getElementById('listGroup'), btn);
+    listType = btn.dataset.list;
+    updateIrrFilterVisibility();
+    resetAndRebuild();
+  });
+});
+
+/* ---- irregular filter-type buttons ---- */
+document.querySelectorAll('#filterTypeGroup .opt-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    setActiveInGroup(document.getElementById('filterTypeGroup'), btn);
+    irrFilterType = btn.dataset.filter;
+    updateIrrFilterVisibility();
+    resetAndRebuild();
+  });
+});
+
+document.getElementById('blockSelect').addEventListener('change', e=>{
+  irrBlockIndex = parseInt(e.target.value, 10);
+  resetAndRebuild();
+});
+document.getElementById('patternSelect').addEventListener('change', e=>{
+  irrPatternValue = e.target.value;
+  resetAndRebuild();
+});
+document.getElementById('rhymeSelect').addEventListener('change', e=>{
+  irrRhymeValue = e.target.value;
+  resetAndRebuild();
+});
+
+/* ---- order buttons ---- */
+document.querySelectorAll('#orderGroup .opt-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    setActiveInGroup(document.getElementById('orderGroup'), btn);
+    orderType = btn.dataset.order;
+    resetAndRebuild();
+  });
+});
+
+/* =====================================================
+   STATS + DIFFICULT VERBS (session-only, never persisted)
+   ===================================================== */
+function updateStatsUI(){
+  document.getElementById('statIntentos').textContent = stats.intentos;
+  document.getElementById('statAciertos').textContent = stats.aciertos;
+  document.getElementById('statRacha').textContent = stats.racha;
+  const pct = stats.intentos===0 ? 0 : Math.round((stats.aciertos/stats.intentos)*100);
+  document.getElementById('statPuntaje').textContent = pct + '%';
+}
+
+function registerMistake(verb){
+  const key = verb.group + '-' + verb.num;
+  if(!sessionMistakes[key]) sessionMistakes[key] = {present: verb.present, count: 0};
+  sessionMistakes[key].count++;
+  updateDifficultList();
+}
+
+function updateDifficultList(){
+  const entries = Object.values(sessionMistakes)
+    .filter(e => e.count > 0)
+    .sort((a,b) => b.count - a.count)
+    .slice(0, 8);
+  const box = document.getElementById('difficultBox');
+  const ul = document.getElementById('difficultList');
+  if(entries.length === 0){
+    box.style.display = 'none';
+    ul.innerHTML = '';
+    return;
+  }
+  box.style.display = '';
+  ul.innerHTML = entries.map(e =>
+    `<li>${e.present} <span class="miss-count">(${e.count}\u00d7 missed)</span></li>`
+  ).join('');
+}
+
+/* =====================================================
+   VERB DRAW (shared between Expert and Beginner cards)
+   ===================================================== */
+function pickVerb(){
+  current = drawNextVerb();
+  if(!current){
+    document.getElementById('verbWord').textContent = '\u2014';
+    document.getElementById('verbWordB').textContent = '\u2014';
+    document.getElementById('resultMsg').textContent = 'No verbs match this filter combination.';
+    document.getElementById('resultMsgB').textContent = 'No verbs match this filter combination.';
+    return;
+  }
+  renderExpertCard();
+  buildBeginnerChips();
+}
+
+function renderExpertCard(){
+  document.getElementById('verbTab').textContent = '#' + current.num + ' \u00b7 ' + current.group;
+  document.getElementById('verbWord').textContent = current.present;
+  document.getElementById('verbWordPh').textContent = '/' + current.presentPh + '/';
+  ['in-past','in-part','in-ger','in-esp'].forEach(id=>{
+    document.getElementById(id).value = '';
+  });
+  ['f-past','f-part','f-ger','f-esp'].forEach(id=>{
+    document.getElementById(id).classList.remove('correct','wrong');
+  });
+  ['ph-past','ph-part','ph-ger'].forEach(id=>{
+    document.getElementById(id).textContent = '';
+  });
+  document.getElementById('resultMsg').textContent = '';
+  document.getElementById('resultMsg').className = 'result-msg';
+  locked = false;
+  if(level === 'expert') document.getElementById('in-past').focus();
+}
+
+/* =====================================================
+   EXPERT MODE (type the answer)
+   ===================================================== */
+function checkAnswer(){
+  if(locked || !current) return;
+  locked = true;
+
+  const checks = [
+    {inputId:'in-past', fieldId:'f-past', phId:'ph-past', value:current.past, ph:current.pastPh, spanish:false},
+    {inputId:'in-part', fieldId:'f-part', phId:'ph-part', value:current.participle, ph:current.participlePh, spanish:false},
+    {inputId:'in-ger',  fieldId:'f-ger',  phId:'ph-ger',  value:current.gerund, ph:current.gerundPh, spanish:false},
+    {inputId:'in-esp',  fieldId:'f-esp',  phId:null,      value:current.spanish, ph:null, spanish:true}
+  ];
+
+  let allCorrect = true;
+  checks.forEach(c=>{
+    const userVal = normalize(document.getElementById(c.inputId).value, c.spanish);
+    const accepted = acceptableAnswers(c.value, c.spanish);
+    const ok = accepted.includes(userVal) && userVal.length>0;
+    const fieldEl = document.getElementById(c.fieldId);
+    fieldEl.classList.remove('correct','wrong');
+    fieldEl.classList.add(ok ? 'correct' : 'wrong');
+    if(c.phId){
+      document.getElementById(c.phId).textContent = ok ? ('/' + c.ph + '/') : '';
+    }
+    if(!ok) allCorrect = false;
+  });
+
+  stats.intentos++;
+  const msg = document.getElementById('resultMsg');
+  if(allCorrect){
+    stats.aciertos++;
+    stats.racha++;
+    msg.textContent = 'Correct! All forms match.';
+    msg.className = 'result-msg good';
+  } else {
+    stats.racha = 0;
+    msg.textContent = 'Some fields are incorrect (shown in red). Review them, then try the next verb.';
+    msg.className = 'result-msg bad';
+    registerMistake(current);
+  }
+  updateStatsUI();
+}
+
+document.getElementById('btnCheck').addEventListener('click', checkAnswer);
+document.getElementById('btnNext').addEventListener('click', pickVerb);
+
+['in-past','in-part','in-ger','in-esp'].forEach(id=>{
+  document.getElementById(id).addEventListener('keydown', e=>{
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      if(!locked) checkAnswer(); else pickVerb();
+    }
+  });
+});
+
+/* =====================================================
+   BEGINNER MODE (drag & drop tiles into slots)
+   ===================================================== */
+let allChips = {};      // id -> {id, text, correctSlot}
+let bankOrder = [];     // ids currently sitting in the word bank
+let slotState = {past:null, part:null, ger:null, esp:null};
+let selectedChipId = null;
+let chipIdSeq = 0;
+
+function buildBeginnerChips(){
+  if(!current) return;
+  const correctDefs = [
+    {slot:'past', text: primaryForm(current.past)},
+    {slot:'part', text: primaryForm(current.participle)},
+    {slot:'ger',  text: primaryForm(current.gerund)},
+    {slot:'esp',  text: primaryForm(current.spanish)}
+  ];
+  const usedTexts = new Set(correctDefs.map(c=>c.text.toLowerCase()));
+
+  const distractorSource = pool.length > 1 ? pool : REG_WITH_NUM;
+  const distractors = [];
+  let guard = 0;
+  while(distractors.length < 2 && guard < 60){
+    guard++;
+    const candidate = distractorSource[Math.floor(Math.random()*distractorSource.length)];
+    if(!candidate || candidate.present === current.present) continue;
+    const fieldOptions = [primaryForm(candidate.past), primaryForm(candidate.participle), primaryForm(candidate.gerund)];
+    const pickText = fieldOptions[Math.floor(Math.random()*fieldOptions.length)];
+    if(usedTexts.has(pickText.toLowerCase())) continue;
+    usedTexts.add(pickText.toLowerCase());
+    distractors.push({slot:null, text:pickText});
+  }
+
+  const allDefs = shuffle([...correctDefs, ...distractors]);
+  allChips = {};
+  chipIdSeq = 0;
+  bankOrder = allDefs.map(def=>{
+    const id = 'chip' + (chipIdSeq++);
+    allChips[id] = {id, text: def.text, correctSlot: def.slot};
+    return id;
+  });
+  slotState = {past:null, part:null, ger:null, esp:null};
+  selectedChipId = null;
+  lockedB = false;
+
+  document.getElementById('verbTabB').textContent = '#' + current.num + ' \u00b7 ' + current.group;
+  document.getElementById('verbWordB').textContent = current.present;
+  document.getElementById('verbWordPhB').textContent = '/' + current.presentPh + '/';
+  document.getElementById('resultMsgB').textContent = '';
+  document.getElementById('resultMsgB').className = 'result-msg';
+
+  renderBeginnerCard();
+}
+
+function renderBeginnerCard(){
+  const bank = document.getElementById('chipBank');
+  bank.innerHTML = '';
+  bankOrder.forEach(id=>{
+    const chip = allChips[id];
+    const el = document.createElement('div');
+    el.className = 'chip' + (selectedChipId === id ? ' selected' : '');
+    el.textContent = chip.text;
+    el.draggable = true;
+    el.dataset.chipId = id;
+    el.addEventListener('click', ()=> onChipClick(id));
+    el.addEventListener('dragstart', e=>{
+      e.dataTransfer.setData('text/plain', id);
+    });
+    bank.appendChild(el);
+  });
+
+  ['past','part','ger','esp'].forEach(slotKey=>{
+    const slotEl = document.querySelector(`.slot-drop[data-slot="${slotKey}"]`);
+    slotEl.classList.remove('correct','wrong','filled');
+    const chipId = slotState[slotKey];
+    if(chipId && allChips[chipId]){
+      slotEl.textContent = allChips[chipId].text;
+      slotEl.classList.add('filled');
+    } else {
+      slotEl.textContent = 'Drop here';
+    }
+  });
+}
+
+function placeChipInSlot(chipId, slotKey){
+  if(!allChips[chipId]) return;
+  // if the slot already holds a chip, send that one back to the bank
+  const existing = slotState[slotKey];
+  if(existing) bankOrder.push(existing);
+  // remove the chip being placed from the bank
+  bankOrder = bankOrder.filter(id => id !== chipId);
+  slotState[slotKey] = chipId;
+  selectedChipId = null;
+  renderBeginnerCard();
+}
+
+function returnSlotToBank(slotKey){
+  const chipId = slotState[slotKey];
+  if(!chipId) return;
+  slotState[slotKey] = null;
+  bankOrder.push(chipId);
+  renderBeginnerCard();
+}
+
+function onChipClick(chipId){
+  if(lockedB) return;
+  selectedChipId = (selectedChipId === chipId) ? null : chipId;
+  renderBeginnerCard();
+}
+
+document.querySelectorAll('.slot-drop').forEach(slotEl=>{
+  const slotKey = slotEl.dataset.slot;
+
+  slotEl.addEventListener('click', ()=>{
+    if(lockedB) return;
+    if(selectedChipId){
+      placeChipInSlot(selectedChipId, slotKey);
+    } else if(slotState[slotKey]){
+      returnSlotToBank(slotKey);
+    }
+  });
+
+  slotEl.addEventListener('dragover', e=>{
+    e.preventDefault();
+    slotEl.classList.add('drag-over');
+  });
+  slotEl.addEventListener('dragleave', ()=>{
+    slotEl.classList.remove('drag-over');
+  });
+  slotEl.addEventListener('drop', e=>{
+    e.preventDefault();
+    slotEl.classList.remove('drag-over');
+    if(lockedB) return;
+    const chipId = e.dataTransfer.getData('text/plain');
+    if(chipId) placeChipInSlot(chipId, slotKey);
+  });
+});
+
+function checkAnswerBeginner(){
+  if(lockedB || !current) return;
+  lockedB = true;
+
+  // Compare by TEXT, not by chip identity. This matters for AAA-pattern
+  // verbs (e.g. Bet-Bet-Bet) where two different slots share the exact
+  // same correct word: the student cannot visually tell those chips
+  // apart, so either one must be accepted in either matching slot.
+  const expectedBySlot = {
+    past: primaryForm(current.past).toLowerCase(),
+    part: primaryForm(current.participle).toLowerCase(),
+    ger:  primaryForm(current.gerund).toLowerCase(),
+    esp:  primaryForm(current.spanish).toLowerCase()
+  };
+
+  let allCorrect = true;
+  ['past','part','ger','esp'].forEach(slotKey=>{
+    const chipId = slotState[slotKey];
+    const slotEl = document.querySelector(`.slot-drop[data-slot="${slotKey}"]`);
+    const chipText = (chipId && allChips[chipId]) ? allChips[chipId].text.toLowerCase() : null;
+    const ok = chipText !== null && chipText === expectedBySlot[slotKey];
+    slotEl.classList.remove('correct','wrong');
+    slotEl.classList.add(ok ? 'correct' : 'wrong');
+    if(!ok) allCorrect = false;
+  });
+
+  stats.intentos++;
+  const msg = document.getElementById('resultMsgB');
+  if(allCorrect){
+    stats.aciertos++;
+    stats.racha++;
+    msg.textContent = 'Correct! All forms match.';
+    msg.className = 'result-msg good';
+  } else {
+    stats.racha = 0;
+    msg.textContent = 'Some slots are incorrect (shown in red). Review them, then try the next verb.';
+    msg.className = 'result-msg bad';
+    registerMistake(current);
+  }
+  updateStatsUI();
+}
+
+document.getElementById('btnCheckB').addEventListener('click', checkAnswerBeginner);
+document.getElementById('btnNextB').addEventListener('click', pickVerb);
+
+/* ---- init ---- */
+populateBlockSelect();
+populatePatternSelect();
+populateRhymeSelect();
+updateIrrFilterVisibility();
+toggleLevelUI();
+buildPool();
+updatePoolInfo();
+pickVerb();
+updateStatsUI();
+
+/* =====================================================
+   TEST MODE ENGINE
+   Completely independent from Practice Mode: its own state,
+   its own pool/deck, its own counters. Nothing here reads
+   or writes any Practice Mode variable.
+   ===================================================== */
+let testScope = 'reg';          // 'reg' | 'irr' | 'mix'
+let testType = 'full';          // 'blocks' | 'pattern' | 'full'
+let testBlockIndex = 1;
+let testPatternValue = 'AAA';
+let testOrder = 'seq';          // 'seq' | 'rand'
+
+let testStudentName = '';
+let testPool = [];
+let testDeck = [];
+let testDeckIndex = 0;
+let testCurrent = null;
+let testResults = [];           // {present, group, num, correct, failedFields[], timeMs}
+let testStartTimestamp = null;  // whole-test start
+let testVerbStartTimestamp = null; // per-verb start
+let testTotalElapsedMs = 0;
+let testTimerInterval = null;
+let testEndedEarly = false; // true when the student used "End Test" before finishing the whole pool
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+function formatStopwatch(ms){
+  const totalSec = Math.floor(ms/1000);
+  const m = Math.floor(totalSec/60);
+  const s = totalSec % 60;
+  return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+}
+
+/* ---- setup panel wiring ---- */
+function updateTestTypeAvailability(){
+  const blocksBtn = document.querySelector('#testTypeGroup [data-type="blocks"]');
+  const patternBtn = document.querySelector('#testTypeGroup [data-type="pattern"]');
+  const blocksOk = (testScope === 'reg' || testScope === 'irr');
+  const patternOk = (testScope === 'irr');
+  blocksBtn.style.display = blocksOk ? '' : 'none';
+  patternBtn.style.display = patternOk ? '' : 'none';
+  if(testType === 'blocks' && !blocksOk) testType = 'full';
+  if(testType === 'pattern' && !patternOk) testType = 'full';
+  document.querySelectorAll('#testTypeGroup .opt-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.type === testType);
+  });
+  updateTestSubSelectVisibility();
+  populateTestBlockSelect();
+  updateTestPoolInfo();
+}
+
+function updateTestSubSelectVisibility(){
+  document.getElementById('testBlockSelectWrap').style.display = (testType === 'blocks') ? '' : 'none';
+  document.getElementById('testPatternSelectWrap').style.display = (testType === 'pattern') ? '' : 'none';
+}
+
+function populateTestBlockSelect(){
+  const sel = document.getElementById('testBlockSelect');
+  const total = (testScope === 'irr') ? IRR_WITH_NUM.length : REG_WITH_NUM.length;
+  const blockCount = Math.ceil(total / 10);
+  if(testBlockIndex > blockCount) testBlockIndex = 1;
+  let html = '';
+  for(let i=1;i<=blockCount;i++){
+    const start = (i-1)*10 + 1;
+    const end = Math.min(start + 9, total);
+    html += `<option value="${i}">Block ${i} (${start}-${end})</option>`;
+  }
+  sel.innerHTML = html;
+  sel.value = String(testBlockIndex);
+}
+
+function populateTestPatternSelect(){
+  const sel = document.getElementById('testPatternSelect');
+  const counts = {AAA:0, ABA:0, ABB:0, ABC:0};
+  IRR_WITH_NUM.forEach(v => counts[classifyPattern(v)]++);
+  sel.innerHTML = Object.keys(PATTERN_LABELS).map(key =>
+    `<option value="${key}">${PATTERN_LABELS[key]} \u2013 ${counts[key]} verbs</option>`
+  ).join('');
+  sel.value = testPatternValue;
+}
+
+function computeTestPool(){
+  let base;
+  if(testScope === 'reg') base = REG_WITH_NUM;
+  else if(testScope === 'irr') base = IRR_WITH_NUM;
+  else base = [...REG_WITH_NUM, ...IRR_WITH_NUM];
+
+  if(testType === 'blocks' && (testScope === 'reg' || testScope === 'irr')){
+    const total = base.length;
+    const start = (testBlockIndex-1)*10 + 1;
+    const end = Math.min(start + 9, total);
+    base = base.filter(v => v.num >= start && v.num <= end);
+  } else if(testType === 'pattern' && testScope === 'irr'){
+    base = base.filter(v => classifyPattern(v) === testPatternValue);
+  }
+  return base;
+}
+
+function updateTestPoolInfo(){
+  const n = computeTestPool().length;
+  document.getElementById('testPoolInfo').textContent =
+    n + (n === 1 ? ' verb' : ' verbs') + ' will be included in this test';
+}
+
+document.querySelectorAll('#testScopeGroup .opt-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    setActiveInGroup(document.getElementById('testScopeGroup'), btn);
+    testScope = btn.dataset.scope;
+    testBlockIndex = 1;
+    updateTestTypeAvailability();
+  });
+});
+
+document.querySelectorAll('#testTypeGroup .opt-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    if(btn.style.display === 'none') return; // not applicable to current scope
+    setActiveInGroup(document.getElementById('testTypeGroup'), btn);
+    testType = btn.dataset.type;
+    updateTestSubSelectVisibility();
+    updateTestPoolInfo();
+  });
+});
+
+document.getElementById('testBlockSelect').addEventListener('change', e=>{
+  testBlockIndex = parseInt(e.target.value, 10);
+  updateTestPoolInfo();
+});
+document.getElementById('testPatternSelect').addEventListener('change', e=>{
+  testPatternValue = e.target.value;
+  updateTestPoolInfo();
+});
+
+document.querySelectorAll('#testOrderGroup .opt-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    setActiveInGroup(document.getElementById('testOrderGroup'), btn);
+    testOrder = btn.dataset.order;
+  });
+});
+
+/* ---- panel switching (setup / running / report) ---- */
+function showTestPanel(state){
+  document.getElementById('testSetupPanel').style.display = (state === 'setup') ? '' : 'none';
+  document.getElementById('testRunningPanel').style.display = (state === 'running') ? '' : 'none';
+  document.getElementById('testReportPanel').style.display = (state === 'report') ? '' : 'none';
+}
+
+/* ---- starting a test ---- */
+function startTest(){
+  const nameInput = document.getElementById('testStudentName');
+  const name = nameInput.value.trim();
+  const errEl = document.getElementById('testNameError');
+
+  if(!name){
+    errEl.textContent = 'Please enter your name to start the test.';
+    errEl.style.display = '';
+    nameInput.focus();
+    return;
+  }
+
+  testPool = computeTestPool();
+  if(testPool.length === 0){
+    errEl.textContent = 'No verbs match this configuration. Please choose another test type.';
+    errEl.style.display = '';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  testStudentName = name;
+  testDeck = (testOrder === 'rand') ? shuffle(testPool) : testPool.slice().sort((a,b)=>{
+    if(a.group !== b.group) return a.group === 'Regular' ? -1 : 1;
+    return a.num - b.num;
+  });
+  testDeckIndex = 0;
+  testResults = [];
+  testStartTimestamp = Date.now();
+  testTotalElapsedMs = 0;
+  testEndedEarly = false;
+
+  startTestTimer();
+  showTestPanel('running');
+  drawNextTestVerb();
+}
+
+document.getElementById('btnStartTest').addEventListener('click', startTest);
+
+/* ---- ending the test voluntarily, before the pool is exhausted ---- */
+document.getElementById('btnEndTest').addEventListener('click', ()=>{
+  const answered = testResults.length;
+  const total = testDeck.length;
+  const confirmed = window.confirm(
+    'End the test now?\n\nYour report will be based only on the ' + answered + ' of ' + total +
+    ' verb(s) you\'ve already answered. The verb currently on screen will not be counted. This cannot be undone.'
+  );
+  if(!confirmed) return;
+  testEndedEarly = true;
+  finishTest();
+});
+
+/* ---- stopwatch ---- */
+function startTestTimer(){
+  updateTimerDisplay();
+  testTimerInterval = setInterval(updateTimerDisplay, 250);
+}
+function stopTestTimer(){
+  if(testTimerInterval){
+    clearInterval(testTimerInterval);
+    testTimerInterval = null;
+  }
+}
+function updateTimerDisplay(){
+  const elapsed = Date.now() - testStartTimestamp;
+  document.getElementById('testTimerDisplay').textContent = formatStopwatch(elapsed);
+}
+
+/* ---- drawing verbs (no retries, no skipping, no repeats) ---- */
+function drawNextTestVerb(){
+  if(testDeckIndex >= testDeck.length){
+    finishTest();
+    return;
+  }
+  testCurrent = testDeck[testDeckIndex];
+  testDeckIndex++;
+  testVerbStartTimestamp = Date.now();
+  renderTestCard();
+}
+
+function renderTestCard(){
+  document.getElementById('testProgress').textContent = 'Verb ' + testDeckIndex + ' of ' + testDeck.length;
+  document.getElementById('testVerbTab').textContent = '#' + testCurrent.num + ' \u00b7 ' + testCurrent.group;
+  document.getElementById('testVerbWord').textContent = testCurrent.present;
+  document.getElementById('testVerbWordPh').textContent = '/' + testCurrent.presentPh + '/';
+  ['test-in-past','test-in-part','test-in-ger','test-in-esp'].forEach(id=>{
+    document.getElementById(id).value = '';
+  });
+  ['tf-past','tf-part','tf-ger','tf-esp'].forEach(id=>{
+    document.getElementById(id).classList.remove('correct','wrong');
+  });
+  document.getElementById('test-in-past').focus();
+}
+
+/* ---- grading (one shot, immediately advances) ---- */
+function submitTestAnswer(){
+  if(!testCurrent) return;
+
+  const elapsedVerbMs = Date.now() - testVerbStartTimestamp;
+  const checks = [
+    {inputId:'test-in-past', label:'Past',       value:testCurrent.past,        spanish:false},
+    {inputId:'test-in-part', label:'Participle', value:testCurrent.participle,  spanish:false},
+    {inputId:'test-in-ger',  label:'Gerund',      value:testCurrent.gerund,      spanish:false},
+    {inputId:'test-in-esp',  label:'Spanish',     value:testCurrent.spanish,    spanish:true}
+  ];
+
+  let allCorrect = true;
+  const failedFields = [];
+  checks.forEach(c=>{
+    const userVal = normalize(document.getElementById(c.inputId).value, c.spanish);
+    const accepted = acceptableAnswers(c.value, c.spanish);
+    const ok = accepted.includes(userVal) && userVal.length > 0;
+    if(!ok){
+      allCorrect = false;
+      failedFields.push(c.label);
+    }
+  });
+
+  testResults.push({
+    present: testCurrent.present,
+    group: testCurrent.group,
+    num: testCurrent.num,
+    correct: allCorrect,
+    failedFields: failedFields,
+    timeMs: elapsedVerbMs
+  });
+
+  drawNextTestVerb();
+}
+
+document.getElementById('btnSubmitTest').addEventListener('click', submitTestAnswer);
+['test-in-past','test-in-part','test-in-ger','test-in-esp'].forEach(id=>{
+  document.getElementById(id).addEventListener('keydown', e=>{
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      submitTestAnswer();
+    }
+  });
+});
+
+/* ---- final report ---- */
+function finishTest(){
+  stopTestTimer();
+  testTotalElapsedMs = Date.now() - testStartTimestamp;
+  renderTestReport();
+  showTestPanel('report');
+}
+
+function renderTestReport(){
+  const answered = testResults.length;      // how many verbs the student actually answered
+  const poolTotal = testDeck.length;        // the full size of the list that was set up (score denominator)
+  const correctCount = testResults.filter(r=>r.correct).length;
+  const pct = poolTotal === 0 ? 0 : Math.round((correctCount/poolTotal)*100);
+  const now = new Date();
+
+  const earlyNote = document.getElementById('reportEarlyNote');
+  if(testEndedEarly){
+    earlyNote.textContent = 'Test ended early \u2014 ' + answered + ' of ' + poolTotal + ' verbs completed.';
+    earlyNote.style.display = '';
+  } else {
+    earlyNote.style.display = 'none';
+    earlyNote.textContent = '';
+  }
+
+  document.getElementById('reportMeta').innerHTML =
+    `<div><strong>Student:</strong> ${escapeHtml(testStudentName)}</div>` +
+    `<div><strong>Date:</strong> ${escapeHtml(now.toLocaleString())}</div>`;
+
+  document.getElementById('reportScore').innerHTML =
+    `<div class="score-big">${correctCount} / ${poolTotal} (${pct}%)</div>` +
+    `<div class="score-sub">Total time: ${formatStopwatch(testTotalElapsedMs)}</div>`;
+
+  const failed = testResults.filter(r=>!r.correct);
+  const failedList = document.getElementById('reportFailedList');
+  failedList.innerHTML = failed.length === 0
+    ? '<li>No failed verbs \u2014 perfect score!</li>'
+    : failed.map(r=>
+        `<li>${escapeHtml(r.present)} <span class="miss-count">(missed: ${escapeHtml(r.failedFields.join(', '))})</span></li>`
+      ).join('');
+
+  const timeList = document.getElementById('reportTimeList');
+  timeList.innerHTML = testResults.map(r=>
+    `<li>${escapeHtml(r.present)} \u2014 ${formatStopwatch(r.timeMs)}${r.correct ? '' : ' <span class="miss-count">(missed)</span>'}</li>`
+  ).join('');
+}
+
+function downloadTestReport(){
+  const answered = testResults.length;      // how many verbs the student actually answered
+  const poolTotal = testDeck.length;        // the full size of the list that was set up (score denominator)
+  const correctCount = testResults.filter(r=>r.correct).length;
+  const pct = poolTotal === 0 ? 0 : Math.round((correctCount/poolTotal)*100);
+  const now = new Date();
+
+  const failed = testResults.filter(r=>!r.correct);
+  const failedListHtml = failed.length === 0
+    ? '<li>No failed verbs \u2014 perfect score!</li>'
+    : failed.map(r =>
+        `<li>${escapeHtml(r.present)} <span class="miss">(missed: ${escapeHtml(r.failedFields.join(', '))})</span></li>`
+      ).join('');
+
+  const timeListHtml = testResults.map(r =>
+    `<li>${escapeHtml(r.present)} \u2014 ${formatStopwatch(r.timeMs)}${r.correct ? '' : ' <span class="miss">(missed)</span>'}</li>`
+  ).join('');
+
+  // A small, fully self-contained standalone HTML file: no external
+  // fonts, scripts or stylesheets, so it opens and looks right offline
+  // in any browser, and can still be printed to PDF from there if wanted.
+  const reportHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Test Report \u2014 ${escapeHtml(testStudentName)}</title>
+<style>
+  body{font-family: Georgia, 'Times New Roman', serif; background:#fffdf7; color:#1f3552; max-width:640px; margin:40px auto; padding:0 20px 40px;}
+  h1{font-size:1.4rem; border-bottom:3px solid #1f3552; padding-bottom:10px; margin-bottom:16px;}
+  .meta{margin:14px 0; font-family: 'Courier New', monospace; font-size:0.9rem;}
+  .score{font-size:1.6rem; font-weight:bold; text-align:center; border:1px solid #999; border-radius:8px; padding:14px; margin:20px 0;}
+  .score .sub{display:block; font-size:0.8rem; font-weight:normal; font-family:'Courier New', monospace; margin-top:6px;}
+  h2{font-size:1.05rem; margin-top:26px;}
+  ul{padding-left:20px; margin:0;}
+  li{margin-bottom:4px; font-size:0.92rem;}
+  .miss{color:#e03131; font-size:0.8rem; font-family:'Courier New', monospace;}
+  .early-note{background:#fdecec; border:1px solid #e03131; color:#e03131; border-radius:8px; padding:10px 14px; font-size:0.85rem; font-weight:bold; margin-bottom:16px;}
+</style>
+</head>
+<body>
+  <h1>English Verb Practice \u2014 Test Report</h1>
+  ${testEndedEarly ? `<div class="early-note">Test ended early \u2014 ${answered} of ${poolTotal} verbs completed.</div>` : ''}
+  <div class="meta">
+    <div><strong>Student:</strong> ${escapeHtml(testStudentName)}</div>
+    <div><strong>Date:</strong> ${escapeHtml(now.toLocaleString())}</div>
+  </div>
+  <div class="score">${correctCount} / ${poolTotal} (${pct}%)<span class="sub">Total time: ${formatStopwatch(testTotalElapsedMs)}</span></div>
+  <h2>Failed verbs</h2>
+  <ul>${failedListHtml}</ul>
+  <h2>Time per verb</h2>
+  <ul>${timeListHtml}</ul>
+</body>
+</html>`;
+
+  const blob = new Blob([reportHtml], {type: 'text/html'});
+  const url = URL.createObjectURL(blob);
+  const safeName = (testStudentName || 'report').trim().replace(/[^a-z0-9]+/gi, '-').toLowerCase() || 'report';
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const dateStamp = now.getFullYear() + pad2(now.getMonth()+1) + pad2(now.getDate());
+  const timeStamp = pad2(now.getHours()) + pad2(now.getMinutes()) + pad2(now.getSeconds());
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `test-report_${safeName}_${dateStamp}_${timeStamp}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('btnPrintReport').addEventListener('click', downloadTestReport);
+
+document.getElementById('btnNewTest').addEventListener('click', ()=>{
+  showTestPanel('setup');
+  updateTestPoolInfo();
+});
+
+/* ---- init ---- */
+populateTestBlockSelect();
+populateTestPatternSelect();
+updateTestTypeAvailability();
+updateTestPoolInfo();
+showTestPanel('setup');
+
+/* =====================================================
+   VERB LISTS ENGINE
+   Read-only reference lists. Fully independent from
+   Practice Mode and Test Mode: no shared state, no counters.
+   ===================================================== */
+function escapeHtmlList(str){
+  return String(str).replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+// One numbered <li> per verb: word + its IPA underneath, for every
+// English form, using the same phonetic style already established
+// elsewhere in the app (.cell-phonetic).
+function buildVerbListHTML(verbArray){
+  return verbArray.map(v => `
+    <li class="vlist-item">
+      <div class="vlist-grid">
+        <div class="vlist-field">
+          <span class="vlist-label">Present</span>
+          <span class="vlist-word">${escapeHtmlList(v.present)}</span>
+          <span class="cell-phonetic">/${escapeHtmlList(v.presentPh)}/</span>
+        </div>
+        <div class="vlist-field">
+          <span class="vlist-label">Past</span>
+          <span class="vlist-word">${escapeHtmlList(v.past)}</span>
+          <span class="cell-phonetic">/${escapeHtmlList(v.pastPh)}/</span>
+        </div>
+        <div class="vlist-field">
+          <span class="vlist-label">Participle</span>
+          <span class="vlist-word">${escapeHtmlList(v.participle)}</span>
+          <span class="cell-phonetic">/${escapeHtmlList(v.participlePh)}/</span>
+        </div>
+        <div class="vlist-field">
+          <span class="vlist-label">Gerund</span>
+          <span class="vlist-word">${escapeHtmlList(v.gerund)}</span>
+          <span class="cell-phonetic">/${escapeHtmlList(v.gerundPh)}/</span>
+        </div>
+        <div class="vlist-field">
+          <span class="vlist-label">Spanish</span>
+          <span class="vlist-word">${escapeHtmlList(v.spanish)}</span>
+        </div>
+      </div>
+    </li>
+  `).join('');
+}
+
+function showListsPanel(name){
+  const panels = {
+    menu: 'listsMenuPanel',
+    regular: 'listsRegularPanel',
+    irrMenu: 'listsIrregularMenuPanel',
+    irrStandard: 'listsIrregularStandardPanel',
+    irrPatternMenu: 'listsIrregularPatternMenuPanel',
+    irrPatternDetail: 'listsIrregularPatternDetailPanel'
+  };
+  Object.keys(panels).forEach(key=>{
+    document.getElementById(panels[key]).style.display = (key === name) ? '' : 'none';
+  });
+}
+
+document.getElementById('btnListsRegular').addEventListener('click', ()=>{
+  document.getElementById('listsRegularOl').innerHTML = buildVerbListHTML(REG_WITH_NUM);
+  showListsPanel('regular');
+});
+
+document.getElementById('btnListsIrregularMenu').addEventListener('click', ()=>{
+  showListsPanel('irrMenu');
+});
+
+document.getElementById('btnListsIrregularStandard').addEventListener('click', ()=>{
+  document.getElementById('listsIrregularStandardOl').innerHTML = buildVerbListHTML(IRR_WITH_NUM);
+  showListsPanel('irrStandard');
+});
+
+document.getElementById('btnListsIrregularPatternMenu').addEventListener('click', ()=>{
+  const counts = {AAA:0, ABA:0, ABB:0, ABC:0};
+  IRR_WITH_NUM.forEach(v => counts[classifyPattern(v)]++);
+  const wrap = document.getElementById('listsPatternButtons');
+  wrap.innerHTML = Object.keys(PATTERN_LABELS).map(key =>
+    `<button class="welcome-btn" data-pattern="${key}">${escapeHtmlList(PATTERN_LABELS[key])} <span class="opt-sub">${counts[key]} verbs</span></button>`
+  ).join('');
+  wrap.querySelectorAll('button[data-pattern]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const pat = btn.dataset.pattern;
+      const filtered = IRR_WITH_NUM.filter(v => classifyPattern(v) === pat);
+      document.getElementById('listsPatternDetailHeading').innerHTML =
+        'Pattern ' + escapeHtmlList(pat) + ' <span class="list-count">(' + filtered.length + ')</span>';
+      document.getElementById('listsPatternDetailOl').innerHTML = buildVerbListHTML(filtered);
+      showListsPanel('irrPatternDetail');
+    });
+  });
+  showListsPanel('irrPatternMenu');
+});
+
+document.querySelectorAll('.local-back-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    showListsPanel(btn.dataset.listTarget);
+  });
+});
+
+/* ---- init ---- */
+showListsPanel('menu');
+
+/* =====================================================
+   TOP-LEVEL SCREEN NAVIGATION (Welcome / Practice / Test)
+   ===================================================== */
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+}
+
+// Keeps the corresponding Welcome button highlighted dark blue for as
+// long as that section is the one currently (or most recently) entered,
+// even across trips back to Welcome. It only switches off when a
+// different section is entered instead.
+let activeWelcomeSection = null; // null | 'practice' | 'test' | 'lists'
+function updateWelcomeHighlight(){
+  document.getElementById('btnGoPractice').classList.toggle('section-active', activeWelcomeSection === 'practice');
+  document.getElementById('btnGoTest').classList.toggle('section-active', activeWelcomeSection === 'test');
+  document.getElementById('btnGoLists').classList.toggle('section-active', activeWelcomeSection === 'lists');
+}
+
+document.getElementById('btnGoPractice').addEventListener('click', ()=>{
+  activeWelcomeSection = 'practice';
+  updateWelcomeHighlight();
+  showScreen('practice');
+});
+document.getElementById('btnGoTest').addEventListener('click', ()=>{
+  activeWelcomeSection = 'test';
+  updateWelcomeHighlight();
+  showScreen('test');
+});
+document.getElementById('btnGoLists').addEventListener('click', ()=>{
+  activeWelcomeSection = 'lists';
+  updateWelcomeHighlight();
+  showScreen('lists');
+});
+document.querySelectorAll('.back-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    showScreen(btn.dataset.target);
+  });
+});
+</script>
+</body>
+</html>
